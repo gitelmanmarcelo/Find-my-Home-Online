@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="city-input" required autocomplete="off">
+    <script>
+
+        function handlechange(e) {
+            console.log('Hi')
+            console.log(e.currentTarget.value)
+        }
+
+        function abc() {
+    
+        const input = document.getElementById("city-input"); // Replace with the ID of your input element
+        const country = "IL"; // The country code for Israel
+        const apikey = "AIzaSyCU9_uOBmTbPd6e_MLkKhNh231kZJ8zQZc"; // Replace with your Google Maps API key
+        const autocomplete = new google.maps.places.Autocomplete(input, {
+    //   types: ["(cities)"],
+      componentRestrictions: {  country : country },
+      apiKey: apikey
+    });
+    
+        autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        for (const component of place.address_components) {}
+            console.log(place);
+        });
+
+        }
+
+
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU9_uOBmTbPd6e_MLkKhNh231kZJ8zQZc&libraries=places&callback=abc">
+    </script>
+</body>
+</html>
