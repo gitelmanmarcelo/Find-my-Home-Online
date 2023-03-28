@@ -1,67 +1,81 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import SearchBox from './SearchBox';
+import LocationSearchInput from './LocationSearchInput';
+import { ToggleButtonGroup, ToggleButton, Stack, Button } from '@mui/material';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import App, { AppContext } from '../App';
+import './RentBuy.css'
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
 
 export default function RentBuy() {
-  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const {searchOptions,setSearchOptions} = useContext(AppContext);
+
+  const navigate = useNavigate();
+
+  const handleOpChange = (evt,val) => {
+    if (val === 'rent')
+      setSearchOptions({...searchOptions,is_rent:true});
+    else
+      setSearchOptions({...searchOptions,is_rent:false});
+    
+  }
+
+  const handleBedroomsChange = (evt,val) => {
+    setSearchOptions({...searchOptions,bedrooms:val});
+  }
+
+  const handleBathroomsChange = (evt,val) => {
+    setSearchOptions({...searchOptions,bathrooms:val});
+  }
+
+  const handleSearchClick = () => {
+    console.log('hi');
+    navigate('/apt-list')
+  }
+
 
   return (
     <Paper sx={{ width: '60%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Rent" {...a11yProps(0)} />
-          <Tab label="Buy" {...a11yProps(1)} />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={0}>
-        <SearchBox/>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
+      <Stack>
+        <ToggleButtonGroup size="large"  exclusive onChange={handleOpChange} value={searchOptions.is_rent ? "rent" : "buy"} color="primary">
+          <ToggleButton value="rent">Rent</ToggleButton>        
+          <ToggleButton value="buy">Buy</ToggleButton>        
+        </ToggleButtonGroup> 
+      </Stack>
+      <Stack>
+      {/* <LocationSearchInput/>  */}
+      </Stack>
+      <Stack direction="row" spacing={4}>
+        <Typography># of bedrooms:</Typography>
+      <ToggleButtonGroup size="medium" exclusive onChange={handleBedroomsChange} value={searchOptions.bedrooms} color="primary">
+        <ToggleButton className="circleBtn" value={1}>1</ToggleButton>        
+        <ToggleButton className="circleBtn" value={2}>2</ToggleButton>        
+        <ToggleButton className="circleBtn" value={3}>3</ToggleButton>        
+        <ToggleButton className="circleBtn" value={4}>4</ToggleButton>        
+        <ToggleButton className="circleBtn" value={5}>5</ToggleButton>        
+        <ToggleButton className="circleBtn" value={6}>6+</ToggleButton>        
+      </ToggleButtonGroup>
+      </Stack>
+ 
+      <Stack direction="row">
+        <Typography># of bathrooms:</Typography>
+      <ToggleButtonGroup size="medium" exclusive onChange={handleBathroomsChange} value={searchOptions.bathrooms} color="primary">
+        <ToggleButton className="circleBtn" value={1}>1</ToggleButton>        
+        <ToggleButton className="circleBtn" value={2}>2</ToggleButton>        
+        <ToggleButton className="circleBtn" value={3}>3+</ToggleButton>        
+      </ToggleButtonGroup>
+      </Stack>
+
+      <Stack>
+        <Button variant="contained" onClick={handleSearchClick}>Search</Button>
+      </Stack>
+ 
     </Paper>
   );
 }

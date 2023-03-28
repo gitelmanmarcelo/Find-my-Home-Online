@@ -1,6 +1,7 @@
 #secret file
 .env
 /secret
+/public/index.html
 
 # dependencies
 /node_modules
