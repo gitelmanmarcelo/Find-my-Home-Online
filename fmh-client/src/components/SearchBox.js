@@ -8,7 +8,7 @@ const SearchBox = (props) => {
 
 // const input = document.getElementById("city-input"); // Replace with the ID of your input element
 // const country = "IL"; // The country code for Israel
-// const apikey = "AIzaSyChEgzfkHmQ7V63pC81_HOL3QPljsNRf8Q"; // Replace with your Google Maps API key
+// const apikey = ""; // Replace with your Google Maps API key
 // const autocomplete = new google.maps.places.Autocomplete(input, {
 // //   types: ["(cities)"],
 // componentRestrictions: {  country : country },
