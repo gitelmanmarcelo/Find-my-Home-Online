@@ -3,7 +3,7 @@ import { AppBar, Box, Toolbar, Typography, Container, Button } from '@mui/materi
 import { Link } from 'react-router-dom';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Home', 'Favorites', 'Owner'];
+const pages = ['Home', 'Favorites', 'login-Owner'];
 
 function Header() {
 

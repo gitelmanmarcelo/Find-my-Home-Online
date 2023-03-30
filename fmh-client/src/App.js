@@ -5,7 +5,9 @@ import AptDetails from './components/AptDetails'
 import { useContext, createContext, useState } from 'react'; 
 import { Route, Routes, Link } from 'react-router-dom';
 import Header from './components/Header';
-import LoginRegister from './components/LoginRegister';
+import LoginOwner from './components/LoginOwner';
+import RegisterOwner from './components/RegisterOwner';
+import RegisterApt from './components/RegisterApt';
 
 export const AppContext = createContext(null);
 function App() {
@@ -21,7 +23,9 @@ function App() {
       <Route path="/home" element = {<Home/>}/>
       <Route path="/apt-list" element = {<AptList/>}/>
       <Route path="/apt-details" element = {<AptDetails/>}/>
-      <Route path="/owner" element = {<LoginRegister/>}/>
+      <Route path="/login-owner" element = {<LoginOwner/>}/>
+      <Route path="/register-owner" element = {<RegisterOwner/>}/>
+      <Route path="/apt/register" element = {<RegisterApt/>}/>
     </Routes>
     </div>
     </AppContext.Provider>
