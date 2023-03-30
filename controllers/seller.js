@@ -26,6 +26,8 @@ const _insertSeller = async (req,res) => {
 const _loginSeller = (req, res) => {
     loginSeller(req.body.username)
     .then( async (data) => {
+        if (!data[0])
+            return res.status(400).json({msg:'Wrong password!'});
         const match = await bcrypt.compare(req.body.password, data[0].password);
         if (!match)
             return res.status(400).json({msg:'Wrong password!'});
