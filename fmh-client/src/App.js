@@ -13,9 +13,11 @@ export const AppContext = createContext(null);
 function App() {
   const [searchOptions,setSearchOptions] = useState({is_rent:true, minPrice:50, maxPrice:60000, minSize: 0, maxSize: 800});
   const [currentApt,setCurrApt] = useState({});
+  const [localData,setLocalData] = useState({city:"",neighborhood:"",street:""});
+  const [currSeller,setCurrSeller] = useState(null);
 
   return (
-    <AppContext.Provider value={{searchOptions,setSearchOptions,currentApt,setCurrApt}}>
+    <AppContext.Provider value={{searchOptions,setSearchOptions,currentApt,setCurrApt,localData,setLocalData,currSeller,setCurrSeller}}>
     <div className="App">
       <Header/>
     <Routes>

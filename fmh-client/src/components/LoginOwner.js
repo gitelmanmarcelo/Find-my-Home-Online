@@ -3,13 +3,16 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useState } from "react";
 import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import RegisterOwner from "./RegisterOwner";
+import { useContext, useState } from "react";
+import { AppContext } from "../App";
 
 function LoginOwner() {
 
+  
+  const {currSeller,setCurrSeller} = useContext(AppContext);
     const navigate = useNavigate();
 
     const [isLogin,setIsLogin] = useState(true);
@@ -28,14 +31,14 @@ function LoginOwner() {
             body: JSON.stringify(loginData)
         })
         .then (res => {
-            if (res.status === 200){
-                console.log("success")
+          if (res.status !== 200)
+            throw Error("login error!");
+          return res.json()
+        } )
+        .then (data => {
+          console.log(data)
+          setCurrSeller(data.seller_id)
                 navigate("/apt/register")
-            }
-            else {
-                setMsg('User or password error');
-
-            }
         })
         .catch (err => {
             console.log('error:',err);

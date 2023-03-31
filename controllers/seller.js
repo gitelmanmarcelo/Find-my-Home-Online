@@ -32,7 +32,7 @@ const _loginSeller = (req, res) => {
         if (!match)
             return res.status(400).json({msg:'Wrong password!'});
         else
-            res.status(200).json({msg: "login success"});
+            res.status(200).json({seller_id: data[0].seller_id});
            })
    .catch( err => {
        console.log(err);

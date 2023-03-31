@@ -10,7 +10,7 @@ const insertSeller = (seller) => {
 
 const loginSeller = (pusername) => {
     return db('sellers')
-    .select('password')
+    .select('password','seller_id')
     .where({username:pusername});
 }
 

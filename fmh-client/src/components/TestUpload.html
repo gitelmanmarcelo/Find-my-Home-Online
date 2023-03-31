@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+
+<form action="http://localhost:5000/profile" method="post" enctype="multipart/form-data">
+    <input type="file" name="avatar" multiple/>
+    <button>submit</button>
+  </form>
+
+
+  <script>
+
+const imageInput = document.querySelector('input'); // input element that accepts image files
+const submitButton = document.querySelector('button'); // button element to submit the form
+
+submitButton.addEventListener('click', async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData();
+  console.log('img:', imageInput.files[0])
+  let files = Array.from(imageInput.files);
+    files.forEach((file,index) => {
+        const myNewFile = new File([file], 'x' + index + '.jpeg', {type: file.type});
+        formData.append("avatar", myNewFile);
+        });
+
+  try {
+    const response = await fetch('http://localhost:5000/upload-multiple', {
+      method: 'POST',
+      body: formData
+    });
+    console.log(response); // server response
+  } catch (error) {
+    console.error(error);
+  }
+});
+</script>
+
+// try {
+//     const response = await fetch('http://localhost:5000/upload-multiple', {
+//       method: 'POST',
+//       body: formData
+//     });
+//     console.log(response); // server response
+//   } catch (error) {
+//     console.error(error);
+//   }
+
+
+//   formData.append('avatar', imageInput.files[0]);
+// try {
+//     const response = await fetch('http://localhost:5000/profile', {
+//       method: 'POST',
+//       body: formData
+//     });
+//     console.log(response); // server response
+//   } catch (error) {
+//     console.error(error);
+//   }

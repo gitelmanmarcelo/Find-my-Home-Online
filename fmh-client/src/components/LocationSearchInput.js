@@ -1,54 +1,52 @@
 import React from 'react';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete';
+import PlacesAutocomplete from 'react-places-autocomplete';
 import './LocationSearchInput.css'
+import { useContext, useState } from "react";
+import { AppContext } from "../App";
  
-class LocationSearchInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { address: '' };
-  }
+function LocationSearchInput(props) {
  
-  handleChange = address => {
-    this.setState({ address });
+  const [address,setAddress] = useState('');
+  const {searchOptions,setSearchOptions,localData,setLocalData} = useContext(AppContext);
+ 
+  const handleChange = address => {
+    setAddress(address);
   };
  
-  handleSelect = (address,placeId,suggestion) => {
+  const handleSelect = (address,placeId,suggestion) => {
     // if (suggestion === null)
     //   return;
     // console.log(address)
     // console.log(placeId)
-    this.setState({ address });
+    setAddress(address);
 
     console.log("sugg:",suggestion)
     switch (suggestion.types[0]) {
       case 'neighborhood':
         console.log('neighborhood');
         console.log(suggestion.formattedSuggestion.mainText)
+        setLocalData({neighborhood: suggestion.formattedSuggestion.mainText, city: suggestion.terms[1].value})
         break;
       case 'locality':
         console.log('city')
         console.log(suggestion.formattedSuggestion.mainText)
+        setLocalData({city: suggestion.formattedSuggestion.mainText})
         break;
       case 'route':
         console.log('street')
         console.log(suggestion.formattedSuggestion.mainText)
-        console.log(suggestion.terms[1].value)
+        setLocalData({street: suggestion.formattedSuggestion.mainText, city: suggestion.terms[1].value})
         break;
       default:
         console.log('other');
     }
   };
  
-  render() {
-
     return (
       <PlacesAutocomplete
-        value={this.state.address}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
+        value={address}
+        onChange={handleChange}
+        onSelect={handleSelect}
         searchOptions={ {types: ['locality','neighborhood','route'], componentRestrictions: {  country : "IL" }}}
         highlightFirstSuggestion = {true}
       >
@@ -86,7 +84,6 @@ class LocationSearchInput extends React.Component {
         )}
       </PlacesAutocomplete>
     );
-  }
 }
 
 export default LocationSearchInput;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AppBar, Box, Toolbar, Typography, Container, Button } from '@mui/material/';
 import { Link } from 'react-router-dom';
-import AdbIcon from '@mui/icons-material/Adb';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 
 const pages = ['Home', 'Favorites', 'login-Owner'];
 
@@ -15,7 +15,7 @@ function Header() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <ApartmentIcon fontSize='large' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap

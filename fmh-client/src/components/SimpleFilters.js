@@ -35,7 +35,7 @@ function SimpleFilters() {
     </ToggleButtonGroup> 
   </Stack>
   <Stack>
-  {/* <LocationSearchInput/>  */}
+  <LocationSearchInput/> 
   </Stack>
   <Stack direction="row" spacing={4}>
     <Typography># of bedrooms:</Typography>
