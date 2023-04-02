@@ -1,6 +1,6 @@
-import { TextField, Slider, FormControlLabel, FormGroup, Checkbox, Stack, ToggleButton, Typography,ToggleButtonGroup, Button } from "@mui/material";
+import { Box, Input, ImageList, ImageListItem, TextField, Slider, FormControlLabel, FormGroup, Checkbox, Stack, ToggleButton, Typography,ToggleButtonGroup, Button } from "@mui/material";
 import LocationSearchInput from "./LocationSearchInput";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
 
 
@@ -9,6 +9,10 @@ function RegisterApt() {
   const {localData,setLocalData,currSeller,setCurrSeller} = useContext(AppContext);
 
     const [aptData,setAptData] = useState({is_rent: true, elevators: false, central_ac: false, split_ac : false, safe_room: false, storage_room: false, accessible : false, refurbished : false, furniture: false, pets : false, dud_shemesh : false});
+    const [mainPhoto,setMainPhoto] = useState("");
+    const [photosList,setphotosList] = useState([]);
+
+    useEffect(() => setLocalData({}),[]);
 
     const handleCBChange = (e) => {
       console.log(e.target.id)
@@ -40,7 +44,7 @@ function RegisterApt() {
     }
 
     const handleSubmitApt = () => {
-      const data = {...aptData,...localData,seller_id:currSeller};
+      const data = {...aptData,...localData,seller_id:currSeller,photos_qty: photosList.length+1};
       console.log('data:',data)
       fetch("http://localhost:5000/apartment/register",{ 
         method: 'POST', 
@@ -51,9 +55,27 @@ function RegisterApt() {
     })
     .then (res => {
         if (res.status === 200)
-          console.log('success')
+          return res.json();
         else
           console.log('fail')
+    })
+    .then (data => {
+      const apt_id = data[0].apt_id;
+      const formData = new FormData();
+      formData.append("photo", new File([mainPhoto], apt_id.toString().padStart(4,'0') + '-1.jpeg', {type: mainPhoto.type}));
+      for (let i=0; i <= photosList.length; i++) {
+        formData.append("photo", new File([photosList[i]], apt_id.toString().padStart(4,'0') + '-' + (i+2).toString() +'.jpeg', {type: mainPhoto.type}));  
+      }
+            fetch('http://localhost:5000/upload-multiple', {
+                method: 'POST',
+                body: formData
+              })
+            .then (response => {
+              console.log(response); // server response
+            })
+            .catch (error => {
+              console.error(error);
+            });
     })
     .catch (err => {
         console.log('error:',err);
@@ -218,7 +240,37 @@ function RegisterApt() {
     <FormControlLabel control={<Checkbox checked={aptData.dud_shemesh} id={"dud_shemesh"} onChange={handleCBChange}/>} label="Dud Shemesh" />
   </FormGroup>    
       
-      <input type="file" multiple/>
+      <Input type="file" onChange={(e) => {
+  const file = e.target.files[0];
+  setMainPhoto(file)
+}}/>
+
+      <Box>
+        <img src={mainPhoto ? URL.createObjectURL(mainPhoto) : ""} sx={{width:'200', height:'200'}} alt=""/>
+      </Box>
+
+      <Input type="file"  inputProps={{ multiple: true }}
+      
+      onChange={(e) => {
+        const list = [];
+        for(let i=0; i<e.target.files.length;i++){
+          console.log("file",e.target.files[i])
+          list.push(e.target.files[i])
+        }
+        setphotosList(list)        
+      }}
+  />
+
+      <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
+
+        {photosList.map((item,index) => (
+         <ImageListItem key={index}>
+           <img 
+           src={URL.createObjectURL(item)}
+          /> 
+        </ImageListItem> 
+         ))} 
+      </ImageList>
 
       </Stack>
       <Button onClick={handleSubmitApt} variant="contained">Register apartment</Button>

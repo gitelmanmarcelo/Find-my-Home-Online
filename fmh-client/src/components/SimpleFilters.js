@@ -1,10 +1,15 @@
-import { Stack, ToggleButton, Typography,ToggleButtonGroup, Button } from "@mui/material";
+import { Box,Stack, ToggleButton, Typography,ButtonGroup,ToggleButtonGroup, Button } from "@mui/material";
 import LocationSearchInput from './LocationSearchInput';
 import { AppContext } from '../App';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 function SimpleFilters() {
-    const {searchOptions,setSearchOptions} = useContext(AppContext);
+    const {searchOptions,setSearchOptions,setLocalData} = useContext(AppContext);
+
+    useEffect(()=>{
+      setSearchOptions({is_rent:true, minPrice:50, maxPrice:60000, minSize: 0, maxSize: 800});
+      setLocalData({city:"",neighborhood:"",street:""});
+    },[])
 
     const handleOpChange = (evt,val) => {
       if (val === 'rent')
@@ -27,9 +32,9 @@ function SimpleFilters() {
     }
     
     return (
-    <>
+    <Stack  spacing={4}>
     <Stack>
-    <ToggleButtonGroup size="large"  exclusive onChange={handleOpChange} value={searchOptions.is_rent ? "rent" : "buy"} color="primary">
+    <ToggleButtonGroup size="medium" sx={{marginTop: '30px'}} exclusive onChange={handleOpChange} value={searchOptions.is_rent ? "rent" : "buy"} color="primary">
       <ToggleButton value="rent">Rent</ToggleButton>        
       <ToggleButton value="buy">Buy</ToggleButton>        
     </ToggleButtonGroup> 
@@ -37,39 +42,45 @@ function SimpleFilters() {
   <Stack>
   <LocationSearchInput/> 
   </Stack>
-  <Stack direction="row" spacing={4}>
-    <Typography># of bedrooms:</Typography>
+  <Stack direction='row'>
+  <Box sx={{width:'150px'}}>
+      <Typography>Nr. of bedrooms:</Typography>
+    </Box>
   <ToggleButtonGroup size="medium" exclusive onChange={handleBedroomsChange} value={searchOptions.bedrooms} color="primary">
-    <ToggleButton className="circleBtn" value={1}>1</ToggleButton>        
-    <ToggleButton className="circleBtn" value={2}>2</ToggleButton>        
-    <ToggleButton className="circleBtn" value={3}>3</ToggleButton>        
-    <ToggleButton className="circleBtn" value={4}>4</ToggleButton>        
-    <ToggleButton className="circleBtn" value={5}>5</ToggleButton>        
+    <ToggleButton className="circleBtn" value={1}>1&nbsp;</ToggleButton>        
+    <ToggleButton className="circleBtn" value={2}>2&nbsp;</ToggleButton>        
+    <ToggleButton className="circleBtn" value={3}>3&nbsp;</ToggleButton>        
+    <ToggleButton className="circleBtn" value={4}>4&nbsp;</ToggleButton>        
+    <ToggleButton className="circleBtn" value={5}>5&nbsp;</ToggleButton>        
     <ToggleButton className="circleBtn" value={6}>6+</ToggleButton>        
   </ToggleButtonGroup>
   </Stack>
 
   <Stack direction="row">
-    <Typography># of bathrooms:</Typography>
+  <Box sx={{width:'150px'}}>
+    <Typography>Nr. of bathrooms:</Typography>
+  </Box>
   <ToggleButtonGroup size="medium" exclusive onChange={handleBathroomsChange} value={searchOptions.bathrooms} color="primary">
-    <ToggleButton className="circleBtn" value={1}>1</ToggleButton>        
-    <ToggleButton className="circleBtn" value={2}>2</ToggleButton>        
+    <ToggleButton className="circleBtn" value={1}>1&nbsp;</ToggleButton>        
+    <ToggleButton className="circleBtn" value={2}>2&nbsp;</ToggleButton>        
     <ToggleButton className="circleBtn" value={3}>3+</ToggleButton>        
   </ToggleButtonGroup>
   </Stack>
 
   <Stack direction="row">
-    <Typography># of parking lots:</Typography>
-  <ToggleButtonGroup size="medium" exclusive onChange={handleParkingChange} value={searchOptions.bathrooms} color="primary">
-    <ToggleButton className="circleBtn" value={1}>1</ToggleButton>        
-    <ToggleButton className="circleBtn" value={2}>2</ToggleButton>        
+  <Box sx={{width:'150px'}}>
+    <Typography>Nr. of parking lots:</Typography>
+  </Box>
+  <ToggleButtonGroup size="medium" exclusive onChange={handleParkingChange} value={searchOptions.parkings} color="primary">
+    <ToggleButton className="circleBtn" value={1}>1&nbsp;</ToggleButton>        
+    <ToggleButton className="circleBtn" value={2}>2&nbsp;</ToggleButton>        
     <ToggleButton className="circleBtn" value={3}>3+</ToggleButton>        
     <ToggleButton className="circleBtn" value={0}>clear</ToggleButton>        
   </ToggleButtonGroup>
   </Stack>
 
 
-  </>
+  </Stack>
     )
 }
 
