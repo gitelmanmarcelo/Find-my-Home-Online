@@ -12,15 +12,14 @@ function LocationSearchInput(props) {
   const [address,setAddress] = useState('');
   const {searchOptions,setSearchOptions,localData,setLocalData} = useContext(AppContext);
  
-  useEffect(()=>{
-    if (init) return;
-
-    init = true;
-
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-    document.head.appendChild(script);
-  },[]);
+    if (init) 
+      return;
+    else {
+      init = true;
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+      document.head.appendChild(script);
+    }
 
   const handleChange = address => {
     setAddress(address);
