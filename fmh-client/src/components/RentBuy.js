@@ -12,24 +12,28 @@ export default function RentBuy() {
   }
 
   return (
-    <Paper sx={{ width: '70%', margin : '30px', display: 'flex', justifyContent: 'center' }}>
-      <Stack direction="row">
-        <Box sx={{width: '30vw'}}>
+    <Paper sx={{ width: '70%', margin : '30px', display: 'flex', justifyContent: 'center', padding: '20px' }}>
+      <Stack sx={{width: '100%'}} direction="row">
+        <Box sx={{width: '100%',
+               backgroundImage: 'url("img/house_tree_background.jpg")',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center'}}>
           <SimpleFilters/>
           <Stack sx={{display:'flex', alignItems: 'center'}}>
             <Button variant="contained" sx={{ width: '100px', marginTop: '30px'}} endIcon={<SearchIcon />}onClick={handleSearchClick}>Search</Button>
           </Stack>
         </Box>
-        <Box
+        {/* <Box
     sx={{
       margin: '20px',
       height: '50vh',
       width: '15vw',
-      backgroundImage: 'url("img/house-background.jpg")',
+      backgroundImage: 'url("img/house_tree_background.jpg")',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center'}}></Box>
-        <Box
+      backgroundPosition: 'center'}}></Box> */}
+        {/* <Box
     sx={{
       margin: '20px',
       height: '50vh',
@@ -37,7 +41,7 @@ export default function RentBuy() {
       backgroundImage: 'url("img/building-bg.jpg")',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center'}}></Box>
+      backgroundPosition: 'center'}}></Box> */}
       </Stack>
     </Paper>
   );

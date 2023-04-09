@@ -27,7 +27,7 @@ function AdvancedFilters() {
     return (
     <>
 
-  <Stack mt={5} spacing={2} direction={'row'}>
+  <Stack mt={7} spacing={2} direction={'row'}>
       <Typography>
         Price:
       </Typography>
@@ -39,7 +39,7 @@ function AdvancedFilters() {
         />
   </Stack>
 
-  <Stack mt={5} spacing={2} direction={'row'}>
+  <Stack mt={7} spacing={2} direction={'row'}>
       <Typography>
         Size:
       </Typography>
@@ -51,7 +51,7 @@ function AdvancedFilters() {
         />
   </Stack>
 
-  <FormGroup>
+  <FormGroup sx={{display:'grid', gridTemplateColumns: '1fr 1fr', margin: "20px 20px"}}>
   <FormControlLabel control={<Checkbox checked={searchOptions.elevators} id={"elevators"} onChange={handleCBChange} />} label="Elevator" />
   <FormControlLabel control={<Checkbox checked={searchOptions.central_ac} id={"central_ac"} onChange={handleCBChange}/>} label="Central AC" />
   <FormControlLabel control={<Checkbox checked={searchOptions.split_ac} id={"split_ac"} onChange={handleCBChange}/>} label="Split AC" />

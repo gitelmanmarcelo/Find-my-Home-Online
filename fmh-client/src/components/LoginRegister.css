@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Roboto:wght@300;500&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  /* box-sizing: border-box; */
+}
+
+section {
+  min-height: 95vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.199);
+  padding: 50px 30px;
+  border-radius: 10px;
+  min-width: 800px;
+  max-width: 1000px;
+  min-height: 400px;
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.container .form {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  padding: 0 20px;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.7s ease-in-out transform;
+  overflow: hidden;
+}
+
+.container .form.sign-in-form {
+  left: 0;
+}
+.container .form.sign-up-form {
+  right: 0;
+}
+
+.container .overlay-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: 0.7s ease-in-out transform;
+}
+
+.container .overlay-container .overlay {
+  position: absolute;
+  left: 0%;
+  width: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transition: 0.7s ease-in-out transform;
+  z-index: 1;
+}
+
+.overlay-container .overlay .overlay-left,
+.overlay-container .overlay .overlay-right {
+  flex-basis: 50%;
+  text-align: center;
+  align-items: center;
+}
+
+.moveOC100 {
+  transform : translateX(100%);
+
+}
+
+.moveOC0 {
+  transform : translateX(0);
+
+}
+
+.moveO-50{
+  transform : translateX(-50%);
+}
+
+.moveO0{
+  transform : translateX(0);
+}

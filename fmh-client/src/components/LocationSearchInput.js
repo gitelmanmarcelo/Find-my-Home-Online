@@ -1,14 +1,27 @@
 import React from 'react';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import './LocationSearchInput.css'
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
+import { apiKey } from '../secret/apiKey.js'
  
+let init=false;
+
 function LocationSearchInput(props) {
  
   const [address,setAddress] = useState('');
   const {searchOptions,setSearchOptions,localData,setLocalData} = useContext(AppContext);
  
+  useEffect(()=>{
+    if (init) return;
+
+    init = true;
+
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+    document.head.appendChild(script);
+  },[]);
+
   const handleChange = address => {
     setAddress(address);
   };
@@ -43,6 +56,7 @@ function LocationSearchInput(props) {
   };
  
     return (
+      <div style={{marginLeft:'12px'}}>
       <PlacesAutocomplete
         value={address}
         onChange={handleChange}
@@ -54,7 +68,7 @@ function LocationSearchInput(props) {
           <div>
             <input
               {...getInputProps({
-                placeholder: 'Search city, neigborhood or street ...',
+                placeholder: 'Enter city, neigborhood or street ...',
                 className: 'location-search-input',
               })}
             />
@@ -83,6 +97,7 @@ function LocationSearchInput(props) {
           </div>
         )}
       </PlacesAutocomplete>
+    </div>
     );
 }
 

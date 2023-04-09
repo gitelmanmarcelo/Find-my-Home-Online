@@ -6,6 +6,7 @@ import LocationSearchInput from "./LocationSearchInput";
 import SimpleFilters from "./SimpleFilters";
 import AdvancedFilters from "./AdvancedFilters";
 
+
 function AptList() 
 {
     const {searchOptions,setSearchOptions,localData} = useContext(AppContext);
@@ -41,27 +42,26 @@ function AptList()
     console.log('aptlist=',aptList)
 
     return (
-        <Paper sx={{ width: '97%', margin : '30px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <Button variant="contained"
-          sx={{ position: "fixed", top: 80, left: 10, zIndex: 2000 }}
-          onClick={() => setDrawerOpen(isDrawerOpen ? false : true)}>{isDrawerOpen ? "Close" : "More filters"}</Button>
-          <Drawer  open={isDrawerOpen} onClose={() => {setDrawerOpen(false)}}>
-            <Box sx={{width:450, paddingTop:8, paddingLeft:2}}>
-                <SimpleFilters/>
-                <AdvancedFilters/>
-            </Box>
-          </Drawer>
-        <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr 1fr', gap: '70px'}}>
+        <Box sx={{ width: '97%', margin : '0px', display: 'flex', position: 'relative', justifyContent: 'center'}}>
+            <Button variant="contained"
+            sx={{ position: "fixed", top: 110, left: 28, zIndex: 2000 }}
+            onClick={() => setDrawerOpen(isDrawerOpen ? false : true)}>{isDrawerOpen ? "Close <" : "More filters >"}</Button>
+            <Drawer sx={{marginTop: '150px'}} open={isDrawerOpen} onClose={() => {setDrawerOpen(false)}}>
+                <Box sx={{backgroundColor: 'white', left: '10px', top: '70px', width:450, paddingTop:18, paddingLeft:2}}>
+                    <AdvancedFilters/>
+                </Box>
+            </Drawer>
+            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr 1fr', gap: '10px', marginTop: '37px'}}>
 
-        {
-            aptList.map(apt => (
-                <div>
-                <AptCard apt={apt}/>
-                </div>
-            ))
-        }
-        </div>
-        </Paper>
+            {
+                aptList.map(apt => (
+                    <div>
+                    <AptCard apt={apt}/>
+                    </div>
+                ))
+            }
+            </div>
+        </Box>
     )
 }
 

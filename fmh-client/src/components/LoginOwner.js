@@ -15,7 +15,6 @@ function LoginOwner() {
   const {currSeller,setCurrSeller} = useContext(AppContext);
     const navigate = useNavigate();
 
-    const [isLogin,setIsLogin] = useState(true);
     const [showPassword,setShowPassword] = useState(false);
     const [loginData,setLoginData] = useState({});
     const [msg,setMsg] = useState("");
@@ -31,17 +30,19 @@ function LoginOwner() {
             body: JSON.stringify(loginData)
         })
         .then (res => {
-          if (res.status !== 200)
+          if (res.status !== 200){
+            setMsg('username/password error!')
             throw Error("login error!");
+          }
           return res.json()
         } )
         .then (data => {
-          console.log(data)
           setCurrSeller(data.seller_id)
-                navigate("/apt/register")
+          navigate("/apt/register")
         })
         .catch (err => {
-            console.log('error:',err);
+            console.log('fetch error:',err);
+            setMsg('username/password error!')
         })
     }
 
@@ -59,10 +60,8 @@ function LoginOwner() {
     }
  
 
-    if (isLogin) {
         return (<>
-            <Typography m={10} textAlign={'left'} variant="h3">Login</Typography>
-            <Stack m={8} sx={{width:'300px'}}>
+            <Stack m={8} spacing={2} sx={{width:'300px'}}>
             <TextField
               id="username"
               label="Username"
@@ -96,15 +95,11 @@ function LoginOwner() {
               variant="standard"
             />
             <Button variant="contained" onClick={handleLoginClick}>Login</Button>
-            <Button variant="text" onClick={() => navigate('/register-owner')}>Register</Button>
-        <Typography m={2} textAlign={'left'} variant="body">{msg}</Typography>
+            <Typography m={2} textAlign={'left'} variant="body">{msg}</Typography>
             </Stack>
             </>
         )
-    } else {   // REGISTER
-      <RegisterOwner/>
     }
 
-}
 
 export default LoginOwner;

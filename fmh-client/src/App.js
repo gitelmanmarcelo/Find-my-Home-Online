@@ -8,6 +8,10 @@ import Header from './components/Header';
 import LoginOwner from './components/LoginOwner';
 import RegisterOwner from './components/RegisterOwner';
 import RegisterApt from './components/RegisterApt';
+import LoginRegister from './components/LoginRegister';
+import Deal from './components/Deal';
+import SellerContact from './components/SellerContact';
+import RegisterBuyer from './components/RegisterBuyer';
 
 export const AppContext = createContext(null);
 function App() {
@@ -15,6 +19,10 @@ function App() {
   const [currentApt,setCurrApt] = useState({});
   const [localData,setLocalData] = useState({city:"",neighborhood:"",street:""});
   const [currSeller,setCurrSeller] = useState(null);
+
+
+  
+
 
   return (
     <AppContext.Provider value={{searchOptions,setSearchOptions,currentApt,setCurrApt,localData,setLocalData,currSeller,setCurrSeller}}>
@@ -25,9 +33,12 @@ function App() {
       <Route path="/home" element = {<Home/>}/>
       <Route path="/apt-list" element = {<AptList/>}/>
       <Route path="/apt-details" element = {<AptDetails/>}/>
-      <Route path="/login-owner" element = {<LoginOwner/>}/>
+      <Route path="/login-owner" element = {<LoginRegister/>}/>
       <Route path="/register-owner" element = {<RegisterOwner/>}/>
       <Route path="/apt/register" element = {<RegisterApt/>}/>
+      <Route path="/deal" element = {<Deal/>}/>
+      <Route path="/seller/contact" element = {<SellerContact/>}/>
+      <Route path="/buyer/register" element = {<RegisterBuyer/>}/>
     </Routes>
     </div>
     </AppContext.Provider>

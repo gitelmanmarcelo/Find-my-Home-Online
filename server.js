@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 const seller_router = require('./routes/seller.js')
+const buyer_router = require('./routes/buyer.js')
 const apart_router = require('./routes/aparts.js')
 
 dotenv.config();
@@ -18,6 +19,8 @@ app.use('/',express.static(__dirname + '/fmh-client/public'));
 app.listen(process.env.PORT, () => { console.log('run on port '+ process.env.PORT)});
 
 app.use('/seller', seller_router);
+
+app.use('/buyer', buyer_router);
 
 app.use('/apartment', apart_router);
 

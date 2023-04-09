@@ -16,6 +16,14 @@ function RegisterOwner() {
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleRegisterClick = (e) => {
+        if (registerData.confirmPassword !== registerData.password) {
+          setMsg("passwords don't match");
+          return;
+        } else {
+          delete registerData.confirmPassword;
+          setMsg("");
+        }
+
         if (!registerData.accept_contact)
           registerData.accept_contact = false;
         fetch("http://localhost:5000/seller/register",{ 
@@ -26,10 +34,7 @@ function RegisterOwner() {
             body: JSON.stringify(registerData)
         })
         .then (res => {
-            if (res.status === 200){
-              // setIsLogin(true);
-            }
-            else {
+            if (res.status !== 200){
               setMsg('Registration error');
             }
             setRegisterData({});
@@ -37,6 +42,7 @@ function RegisterOwner() {
         .catch (err => {
           setRegisterData({});
           console.log('error:',err);
+          setMsg('Registration error');
         })
     }
 
@@ -61,6 +67,9 @@ function RegisterOwner() {
               case 'password':
                   setRegisterData({...registerData,password: e.currentTarget.value});
                   break;
+              case 'confirmPassword':
+                  setRegisterData({...registerData,confirmPassword: e.currentTarget.value});
+                  break;
               case 'accept_contact':
                   setRegisterData({...registerData,accept_contact: e.target.checked});
                   break;
@@ -70,11 +79,11 @@ function RegisterOwner() {
 
     return ( 
         <>
-            <Typography m={10} textAlign={'left'} variant="h3">Register</Typography>
             <Stack m={8} sx={{width:'300px'}}>
             <TextField
               id="fname"
               label="First Name"
+              required
               value={registerData.fname}
               onChange={handleRegisterChange}
               variant="standard"
@@ -82,6 +91,7 @@ function RegisterOwner() {
             <TextField
               id="lname"
               label="Last Name"
+              required
               value={registerData.lname}
               onChange={handleRegisterChange}
               variant="standard"
@@ -89,6 +99,7 @@ function RegisterOwner() {
             <TextField
               id="email"
               label="Email"
+              required
               onChange={handleRegisterChange}
               variant="standard"
             />
@@ -101,6 +112,7 @@ function RegisterOwner() {
             <TextField
               id="username"
               label="Username"
+              required
               onChange={handleRegisterChange}
               InputProps={{
                 startAdornment: (
@@ -115,6 +127,7 @@ function RegisterOwner() {
               type={showPassword ? 'text' : 'password'}
               id="password"
               label="Password"
+              required
               onChange={handleRegisterChange}
               InputProps={{
                 endAdornment: (
@@ -133,6 +146,7 @@ function RegisterOwner() {
               type={showPassword ? 'text' : 'password'}
               id="confirmPassword"
               label="Confirm password"
+              required
               onChange={handleRegisterChange}
               InputProps={{
                 endAdornment: (
@@ -147,9 +161,8 @@ function RegisterOwner() {
               }}
               variant="standard"
             />
-            <FormControlLabel control={<Checkbox id="accept_contact" onClick={handleRegisterChange} />} label="Allow us to share your contact with buyer" />
+            <FormControlLabel sx={{width:'500px', color: 'grey'}}control={<Checkbox id="accept_contact" onClick={handleRegisterChange} />} label="Allow us to share your contact with buyer" />
             <Button variant="contained" onClick={handleRegisterClick}>Register</Button>
-        <Button variant="text" onClick={() => navigate("/login-owner")}>Login</Button>
             <Typography m={2} textAlign={'left'} variant="body">{msg}</Typography>
             </Stack>
             </>

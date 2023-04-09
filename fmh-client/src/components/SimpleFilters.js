@@ -1,7 +1,7 @@
 import { Box,Stack, ToggleButton, Typography,ButtonGroup,ToggleButtonGroup, Button } from "@mui/material";
 import LocationSearchInput from './LocationSearchInput';
 import { AppContext } from '../App';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 function SimpleFilters() {
     const {searchOptions,setSearchOptions,setLocalData} = useContext(AppContext);
@@ -28,18 +28,35 @@ function SimpleFilters() {
     }
 
     const handleParkingChange = (evt,val) => {
-      setSearchOptions({...searchOptions,parkings : val});
+      if (val === 0) {
+        const temp = {...searchOptions};
+        delete temp.parkings;
+        setSearchOptions(temp)
+      }
+      else
+        setSearchOptions({...searchOptions,parkings : val});
     }
     
+
+    const [alignment, setAlignment] = useState('web');
+
+    const handleChange = (event, newAlignment) => {
+      setAlignment(newAlignment);
+    };
+
+
+
+
     return (
-    <Stack  spacing={4}>
+<>
+<Stack  spacing={4}>
     <Stack>
-    <ToggleButtonGroup size="medium" sx={{marginTop: '30px'}} exclusive onChange={handleOpChange} value={searchOptions.is_rent ? "rent" : "buy"} color="primary">
+    <ToggleButtonGroup size="medium" sx={{marginTop: '30px', marginLeft: '12px'}} exclusive onChange={handleOpChange} value={searchOptions.is_rent ? "rent" : "buy"} color="primary">
       <ToggleButton value="rent">Rent</ToggleButton>        
       <ToggleButton value="buy">Buy</ToggleButton>        
     </ToggleButtonGroup> 
   </Stack>
-  <Stack>
+  <Stack sx={{width:'550px'}}>
   <LocationSearchInput/> 
   </Stack>
   <Stack direction='row'>
@@ -80,7 +97,13 @@ function SimpleFilters() {
   </Stack>
 
 
+
+
+
   </Stack>
+
+</>
+
     )
 }
 

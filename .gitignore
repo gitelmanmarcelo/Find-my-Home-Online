@@ -1,7 +1,6 @@
 #secret file
 .env
-/secret
-/public/index.html
+/fmh-client/src/secret
 
 # dependencies
 /node_modules

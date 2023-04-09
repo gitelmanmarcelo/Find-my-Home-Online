@@ -14,8 +14,15 @@ const loginSeller = (pusername) => {
     .where({username:pusername});
 }
 
+const getSeller = (pseller_id) => {
+    return db('sellers')
+    .select('*')
+    .where({seller_id:pseller_id});
+}
+
 
 module.exports = {
     insertSeller,
     loginSeller,
+    getSeller
 }

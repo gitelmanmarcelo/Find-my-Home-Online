@@ -1,4 +1,5 @@
 const { 
+    getSeller, 
     loginSeller, 
     insertSeller,
     } = require('../modules/seller.js');
@@ -40,8 +41,22 @@ const _loginSeller = (req, res) => {
 
 };
 
+const _getSeller = (req, res) => {
+    getSeller(req.body.seller_id)
+    .then( async (data) => {
+        if (!data[0])
+            return res.status(400).json({msg:'Wrong seller id!'});
+        res.status(200).send(data);
+           })
+   .catch( err => {
+       console.log(err);
+   })
+
+};
+
 module.exports = {
     _insertSeller,
     _loginSeller,
+    _getSeller,
 };
 
