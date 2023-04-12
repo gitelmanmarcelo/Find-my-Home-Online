@@ -7,6 +7,7 @@ import './aptdetails.css'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Map from './Map.js';
+import { serverUrl } from "../serverUrl";
 
 let img1 = "visible";
 let img2 = "visible";
@@ -119,18 +120,18 @@ function AptDetail(props) {
                     </Button>
 
                     <div className={img1} style={{position:'relative'}}>
-                        <img style={{width:'250px', height:'200px'}} src={"http://localhost:5000/photos/"+ currentApt.apt_id.toString().padStart(4,'0') + "-" + images[0] + ".jpeg"} />
+                        <img style={{width:'250px', height:'200px'}} src={serverUrl+"/photos/"+ currentApt.apt_id.toString().padStart(4,'0') + "-" + images[0] + ".jpeg"} />
                         <Box  sx={{typography: 'body2', zIndex:'500', padding: '2px', backgroundColor: 'white', color: 'grey', position: 'absolute', top: '10%', right: '5%', fontWeight: 'bold', borderRadius:'10%'}} > 
                             {images[0]}/{currentApt.photos_qty}
                         </Box> 
                     </div>
                     <div className={img2} style={{position:'relative'}}>
-                        <img style={{width:'250px', height:'200px'}} src={"http://localhost:5000/photos/"+ currentApt.apt_id.toString().padStart(4,'0') + "-" + images[1] + ".jpeg"} />
+                        <img style={{width:'250px', height:'200px'}} src={serverUrl+"/photos/"+ currentApt.apt_id.toString().padStart(4,'0') + "-" + images[1] + ".jpeg"} />
                         <Box  sx={{typography: 'body2', zIndex:'500', padding: '2px', backgroundColor: 'white', color: 'grey', position: 'absolute', top: '10%', right: '5%', fontWeight: 'bold', borderRadius:'10%'}} > 
                             {images[1]}/{currentApt.photos_qty}
                         </Box>                </div>
                     <div className={img3} style={{position:'relative'}}>
-                        <img style={{width:'250px', height:'200px'}} src={"http://localhost:5000/photos/"+ currentApt.apt_id.toString().padStart(4,'0') + "-" + images[2] + ".jpeg"} />
+                        <img style={{width:'250px', height:'200px'}} src={"/photos/"+ currentApt.apt_id.toString().padStart(4,'0') + "-" + images[2] + ".jpeg"} />
                         <Box  sx={{typography: 'body2', zIndex:'500', padding: '2px', backgroundColor: 'white', color: 'grey', position: 'absolute', top: '10%', right: '5%', fontWeight: 'bold', borderRadius:'10%'}} > 
                             {images[2]}/{currentApt.photos_qty}
                         </Box>                

@@ -7,6 +7,7 @@ import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AppContext } from "../App";
+import { serverUrl } from "../serverUrl";
 
 function LoginOwner() {
 
@@ -21,7 +22,7 @@ function LoginOwner() {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleLoginClick = (e) => {
-    fetch("http://localhost:5000/seller/login",{ 
+    fetch(serverUrl+"/seller/login",{ 
         method: 'POST', 
         headers: {
             'Content-type' : 'application/json'

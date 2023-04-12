@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import AptCard from "./AptCard";
 import { AppContext } from "../App";
+import { serverUrl } from "../serverUrl";
 
 
 function FavsList() 
@@ -14,7 +15,7 @@ function FavsList()
     useEffect(() => {
         const condition = JSON.parse(localStorage.getItem("favList"));
 
-        fetch("http://localhost:5000/apartment/getFavs",{ 
+        fetch(serverUrl+"/apartment/getFavs",{ 
             method: 'POST', 
             headers: {
                 'Content-type' : 'application/json'

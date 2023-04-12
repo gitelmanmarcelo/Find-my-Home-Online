@@ -2,6 +2,7 @@ import { Stack, Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../App";
+import { serverUrl } from "../serverUrl";
   
 function Deal() {
 
@@ -9,7 +10,7 @@ const navigate = useNavigate();
 const {setCurrSeller} = useContext(AppContext);
 
 const handleSelfClick = () => {
-    fetch('http://localhost:5000/seller/getSeller',{ 
+    fetch(serverUrl+'/seller/getSeller',{ 
         method: 'POST', 
         headers: {
             'Content-type' : 'application/json'

@@ -5,6 +5,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { serverUrl } from "../serverUrl";
 
 function RegisterOwner() {
 
@@ -26,7 +27,7 @@ function RegisterOwner() {
 
         if (!registerData.accept_contact)
           registerData.accept_contact = false;
-        fetch("http://localhost:5000/seller/register",{ 
+        fetch(serverUrl+"/seller/register",{ 
             method: 'POST', 
             headers: {
                 'Content-type' : 'application/json'

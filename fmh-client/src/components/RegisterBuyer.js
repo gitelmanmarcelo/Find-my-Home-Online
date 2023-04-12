@@ -1,6 +1,7 @@
 import { Stack,  TextField, Typography, Button, Paper } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { serverUrl } from "../serverUrl";
 
 function RegisterBuyer() {
 
@@ -11,7 +12,7 @@ function RegisterBuyer() {
 
     const handleRegisterClick = (e) => {
 
-        fetch("http://localhost:5000/buyer/register",{ 
+        fetch(serverUrl+"/buyer/register",{ 
             method: 'POST', 
             headers: {
                 'Content-type' : 'application/json'

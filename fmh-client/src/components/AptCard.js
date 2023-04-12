@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
 import { Box, Stack, IconButton } from "@mui/material";
+import { serverUrl } from '../serverUrl.js'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
@@ -68,7 +69,7 @@ function AptCard(props) {
             boxShadow: 3
         }}}>
             <Box sx={{ width:"80%", height: "45%", margin: '0 auto', marginTop: '15px', position: 'relative',
-            backgroundImage: `url(http://localhost:5000/photos/${props.apt.apt_id.toString().padStart(4,'0')}-1.jpeg)`,
+            backgroundImage: `url(${serverUrl}/photos/${props.apt.apt_id.toString().padStart(4,'0')}-1.jpeg)`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center center',
                                 backgroundRepeat: 'no-repeat' }}>

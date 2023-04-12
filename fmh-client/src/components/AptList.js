@@ -3,6 +3,7 @@ import { AppContext } from "../App";
 import { Drawer, Box, Button } from "@mui/material";
 import AptCard from "./AptCard";
 import AdvancedFilters from "./AdvancedFilters";
+import { serverUrl } from "../serverUrl";
 
 
 function AptList() 
@@ -18,7 +19,7 @@ function AptList()
         if (localData.city !== "") condition.city = localData.city;
         if (localData.neighborhood !== "") condition.neighborhood = localData.neighborhood;
         if (localData.street !== "") condition.street = localData.street;
-        fetch("http://localhost:5000/apartment/search",{ 
+        fetch(serverUrl+"/apartment/search",{ 
             method: 'POST', 
             headers: {
                 'Content-type' : 'application/json'

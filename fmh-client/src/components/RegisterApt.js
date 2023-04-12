@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import AutocompleteInput from "./AutocompleteInput";
+import { serverUrl } from "../serverUrl";
 
 
 function RegisterApt() {
@@ -44,7 +45,7 @@ function RegisterApt() {
 
   const handleSubmitApt = () => {
     const data = {...aptData,...localData,seller_id:currSeller,photos_qty: photosList.length+1};
-    fetch("http://localhost:5000/apartment/register",{ 
+    fetch(serverUrl+"/apartment/register",{ 
       method: 'POST', 
       headers: {
           'Content-type' : 'application/json'
@@ -66,7 +67,7 @@ function RegisterApt() {
     for (let i=0; i <= photosList.length; i++) {
       formData.append("photo", new File([photosList[i]], apt_id.toString().padStart(4,'0') + '-' + (i+2).toString() +'.jpeg', {type: mainPhoto.type}));  
     }
-          fetch('http://localhost:5000/upload-multiple', {
+          fetch(serverUrl+'/upload-multiple', {
               method: 'POST',
               body: formData
             })
