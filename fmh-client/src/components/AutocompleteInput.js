@@ -1,7 +1,7 @@
 import { Loader } from '@googlemaps/js-api-loader';
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
-import { apiKey } from '../secret/apiKey';
+import { apiKey } from '../apiKey';
 
 
 const AutocompleteInput = () => {

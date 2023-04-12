@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
-import { apiKey } from '../secret/apiKey';
+import { apiKey } from '../apiKey';
 
 const Map = (props) => {
   const mapRef = useRef(null);
