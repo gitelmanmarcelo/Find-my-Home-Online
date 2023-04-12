@@ -9,6 +9,8 @@ apiKey.js
 /fmh-client/node_modules
 /.pnp
 .pnp.js
+package-lock.json
+/fmh-client/package-lock.json
 
 # testing
 /coverage
