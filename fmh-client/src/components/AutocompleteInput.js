@@ -1,7 +1,6 @@
 import { Loader } from '@googlemaps/js-api-loader';
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
-import { apiKey } from '../apiKey';
 
 
 const AutocompleteInput = () => {
@@ -13,7 +12,7 @@ const AutocompleteInput = () => {
 
   useEffect(() => {
     const loader = new Loader({
-      apiKey: apiKey,
+      apiKey: process.env.REACT_APP_API_KEY,
       version: 'weekly',
       libraries: ['places'],
     });

@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
-import { apiKey } from '../apiKey';
 
 const Map = (props) => {
   const mapRef = useRef(null);
 
   useEffect(() => {
     const loader = new Loader({
-      apiKey: apiKey,
+      apiKey: process.env.REACT_APP_API_KEY,
       version: 'weekly',
       libraries: ['places']
     });

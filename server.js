@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -14,7 +15,7 @@ app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
-app.use('/',express.static(__dirname + '/fmh-client/public'));
+app.use('/',express.static(__dirname + '/fmh-client/build'));
 
 app.listen(process.env.PORT, () => { console.log('run on port '+ process.env.PORT)});
 
@@ -45,3 +46,9 @@ app.post('/upload-multiple',upload.fields([{ name: 'photo' }]), function (req, r
 app.post('/upload-single', upload.single('photo'), function (req, res, next) {
   res.sendStatus(200);
   })
+
+  app.use(express.static(path.join(__dirname,'fmh-client/build')));
+
+  app.get('*', (req,res) => {
+    res.sendFile(path.resolve(__dirname,'./fmh-client/build','index.html'))
+  });

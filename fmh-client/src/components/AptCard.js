@@ -16,7 +16,7 @@ function AptCard(props) {
         if (favList===null) SetFavorite(false);
         else
             SetFavorite(favList.some(el => el === props.apt.apt_id));
-    },[isFavorite]);
+    },[]);
 
     const handleClick = () => {
         setCurrApt(props.apt);

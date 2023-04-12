@@ -131,7 +131,7 @@ function AptDetail(props) {
                             {images[1]}/{currentApt.photos_qty}
                         </Box>                </div>
                     <div className={img3} style={{position:'relative'}}>
-                        <img style={{width:'250px', height:'200px'}} src={"/photos/"+ currentApt.apt_id.toString().padStart(4,'0') + "-" + images[2] + ".jpeg"} />
+                        <img style={{width:'250px', height:'200px'}} src={serverUrl+"/photos/"+ currentApt.apt_id.toString().padStart(4,'0') + "-" + images[2] + ".jpeg"} />
                         <Box  sx={{typography: 'body2', zIndex:'500', padding: '2px', backgroundColor: 'white', color: 'grey', position: 'absolute', top: '10%', right: '5%', fontWeight: 'bold', borderRadius:'10%'}} > 
                             {images[2]}/{currentApt.photos_qty}
                         </Box>                
