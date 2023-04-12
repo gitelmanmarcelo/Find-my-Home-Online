@@ -1,5 +1,6 @@
 const { 
     searchApt, 
+    getFavs, 
     insertApt,
     searchRaw
     } = require('../modules/aparts.js');
@@ -25,6 +26,16 @@ const _searchApt = (req, res) => {
 
 };
 
+const _getFavs = (req, res) => {
+    getFavs(req.body.condition)
+    .then( data => {
+        res.status(200).json(data);})
+   .catch( err => {
+       console.log(err);
+   })
+
+};
+
 const _searchRaw = (req, res) => {
     searchRaw(req.body.sql_sentence)
     .then( data => {
@@ -38,6 +49,7 @@ const _searchRaw = (req, res) => {
 module.exports = {
     _insertApt,
     _searchApt,
+    _getFavs,
     _searchRaw
 };
 

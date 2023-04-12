@@ -1,6 +1,6 @@
-import { Stack, Paper, Box, Button, Typography } from "@mui/material";
+import { Stack, Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../App";
   
 function Deal() {
@@ -39,13 +39,13 @@ const handleSelfClick = () => {
     const urlParams = new URLSearchParams(queryString);
     const seller_id = urlParams.get('seller')
     return (
-        <Paper sx={{paddingTop: '20px', width: '90vw', display:'flex', flexDirection:'column', justifyContent: 'space-around', alignItems: 'center'}}>
+        <Box sx={{margin: '20px auto', backgroundColor:'transparent', border: 'none', paddingTop: '20px', width: '90vw', display:'flex', flexDirection:'column', justifyContent: 'space-around', alignItems: 'center'}}>
             <Stack sx={{display:'flex', flexDirection:'column', justifyContent: 'space-around', alignItems: 'center'}} spacing={4}>
                 <Typography variant="h4" >
                     In <em>Find my Home</em> we let you choose between two ways of making a deal:
                 </Typography>
                 <Stack spacing={4} direction={'row'}>
-                    <Stack spacing={3} sx={{padding:'30px', border:'2px solid grey', borderRadius: '5px'}}>
+                    <Stack spacing={3} sx={{backgroundColor: 'white', padding:'30px', borderRadius: '5px'}}>
                         <Stack spacing={4} direction={'row'} >
                             <Typography variant="h5" sx={{width: '350px', textAlign:'justify'}}>
                                 1. Make a deal through <em>Find my Home</em>:
@@ -59,7 +59,7 @@ const handleSelfClick = () => {
                             "Find my Home" take care of everything I will go to the beach now</Button>
                     </Stack>
 
-                <Stack  spacing={15} sx={{padding:'30px', border:'2px solid grey', borderRadius: '5px'}}>
+                <Stack  spacing={15} sx={{backgroundColor: 'white', padding:'30px',  borderRadius: '5px'}}>
                     <Stack direction={'row'} spacing={4}>
                         <i style={{fontSize:"7rem"}} class="fa-regular fa-address-book"></i>
                         <Typography variant="h5" sx={{width:'350px', textAlign:'justify'}}>
@@ -70,10 +70,9 @@ const handleSelfClick = () => {
                 </Stack>
             </Stack>
 
-                </Stack>
-        </Paper>
-
-        );
+        </Stack>
+    </Box>        
+    );
 
 }
 

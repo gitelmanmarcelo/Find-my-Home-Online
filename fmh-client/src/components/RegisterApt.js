@@ -1,25 +1,25 @@
-import { TextareaAutosize, Box, Input, ImageList, ImageListItem, TextField, Slider, FormControlLabel, FormGroup, Checkbox, Stack, ToggleButton, Typography,ToggleButtonGroup, Button } from "@mui/material";
-import LocationSearchInput from "./LocationSearchInput";
+import { Box, Input, ImageList, ImageListItem, TextField, FormControlLabel, FormGroup, Checkbox, Stack, ToggleButton, Typography,ToggleButtonGroup, Button } from "@mui/material";
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
+import { useNavigate } from "react-router-dom";
+import AutocompleteInput from "./AutocompleteInput";
 
 
 function RegisterApt() {
 
-  const {localData,setLocalData,currSeller,setCurrSeller} = useContext(AppContext);
+  const {localData,setLocalData,currSeller,setCurrApt} = useContext(AppContext);
 
   const [aptData,setAptData] = useState({is_rent: true, elevators: false, central_ac: false, split_ac : false, safe_room: false, storage_room: false, accessible : false, refurbished : false, furniture: false, pets : false, dud_shemesh : false});
   const [mainPhoto,setMainPhoto] = useState("");
   const [photosList,setphotosList] = useState([]);
 
-  useEffect(() => setLocalData({}),[]);
+  const navigate = useNavigate();
+
+  useEffect(() => setLocalData({city:"",neighborhood:"",street:""}),[]);
 
   const handleCBChange = (e) => {
-    console.log(e.target.id)
-    console.log(e.target.checked)
     const temp = {...aptData}
     temp[e.target.id] = e.target.checked;
-    console.log(temp)
     setAptData(temp);
   }
 
@@ -37,7 +37,6 @@ function RegisterApt() {
   }
 
   const handleInputChange = (e) => {
-    console.log("val:",e.target.value)
     const temp = {...aptData}
     temp[e.target.id] = e.target.value;
     setAptData(temp);
@@ -45,7 +44,6 @@ function RegisterApt() {
 
   const handleSubmitApt = () => {
     const data = {...aptData,...localData,seller_id:currSeller,photos_qty: photosList.length+1};
-    console.log('data:',data)
     fetch("http://localhost:5000/apartment/register",{ 
       method: 'POST', 
       headers: {
@@ -59,8 +57,10 @@ function RegisterApt() {
       else
         console.log('fail')
   })
-  .then (data => {
+  .then (async data => {
     const apt_id = data[0].apt_id;
+    setAptData({...aptData,apt_id:apt_id});
+    setCurrApt({...aptData,apt_id:apt_id, photos_qty: photosList.length+1});
     const formData = new FormData();
     formData.append("photo", new File([mainPhoto], apt_id.toString().padStart(4,'0') + '-1.jpeg', {type: mainPhoto.type}));
     for (let i=0; i <= photosList.length; i++) {
@@ -70,8 +70,12 @@ function RegisterApt() {
               method: 'POST',
               body: formData
             })
-          .then (response => {
-            console.log(response); // server response
+          .then (async response => {
+            if (response.status === 200){
+              navigate("/apt-details");
+            }
+            else
+              throw Error("Error registering apartment")
           })
           .catch (error => {
             console.error(error);
@@ -83,9 +87,8 @@ function RegisterApt() {
   }
 
   return (
-
     <>
-
+    <Typography mt={2} variant="h4">Register new apartment</Typography>
     <Stack direction={'row'} spacing={10} mt={2} >
 
       <Stack ml={2} spacing={2} sx={{width:'750px'}}>
@@ -95,7 +98,9 @@ function RegisterApt() {
           <ToggleButton value="buy">Sell</ToggleButton>        
         </ToggleButtonGroup> 
 
-        <LocationSearchInput/> 
+        <Box sx={{display: 'flex', justifyContent: 'flex-start', margin: '0px', paddingLeft:'0px', width:'400px'}}>
+    <AutocompleteInput/> 
+  </Box> 
 
         <TextField InputLabelProps={{ shrink: true }}
           id="city"
@@ -118,6 +123,7 @@ function RegisterApt() {
           onChange={handleLocalChange}
           variant="standard"
         />
+
         <Stack direction={'row'} spacing={2}>
 
           <TextField InputLabelProps={{ shrink: true }}
@@ -136,10 +142,9 @@ function RegisterApt() {
             variant="standard"
           />
 
-          </Stack>
+        </Stack>
 
-          <Stack direction={'row'} spacing={2}>
-
+        <Stack direction={'row'} spacing={2}>
 
           <TextField InputLabelProps={{ shrink: true }}
             id="apt_nr"
@@ -191,41 +196,41 @@ function RegisterApt() {
               onChange={handleInputChange}
               variant="standard"
             />
-          </Stack>
+        </Stack>
 
-          <Stack direction={'row'} spacing={2}>
-            <TextField
-              id="balconies"
-              label="Balconies"
-              value={aptData.balconies}
-              onChange={handleInputChange}
-              variant="standard"
-            />
-            <TextField
-              id="parkings"
-              label="Parking spaces"
-              value={aptData.parkings}
-              onChange={handleInputChange}
-              variant="standard"
-            />
-          </Stack>
-
-          <TextField sx={{width:'180px'}}
-            id="size"
-            label="Size"
-            value={aptData.size}
+        <Stack direction={'row'} spacing={2}>
+          <TextField
+            id="balconies"
+            label="Balconies"
+            value={aptData.balconies}
             onChange={handleInputChange}
             variant="standard"
           />
           <TextField
-            id="price" sx={{width:'180px'}}
-            label="Price"
-            value={aptData.price}
+            id="parkings"
+            label="Parking spaces"
+            value={aptData.parkings}
             onChange={handleInputChange}
             variant="standard"
-            />
+          />
+        </Stack>
 
-          <Stack direction={'row'} spacing={2}>
+        <TextField sx={{width:'180px'}}
+          id="size"
+          label="Size"
+          value={aptData.size}
+          onChange={handleInputChange}
+          variant="standard"
+        />
+        <TextField
+          id="price" sx={{width:'180px'}}
+          label="Price"
+          value={aptData.price}
+          onChange={handleInputChange}
+          variant="standard"
+          />
+
+        <Stack direction={'row'} spacing={2}>
 
             <TextField
               id="arnona"
@@ -242,9 +247,7 @@ function RegisterApt() {
               onChange={handleInputChange}
               variant="standard"
             />
-          </Stack>
-
-          
+        </Stack>
 
       </Stack>  
 
@@ -263,46 +266,42 @@ function RegisterApt() {
 
       <Stack spacing={2} sx={{paddingRight:'16px', width:'750px'}}>
     
-      <label style={{border:'1px solid rgba(21, 101, 192,0.4)' ,width: '250px', padding: '4px', borderRadius: '5px', marginTop: '8px', backgroundColor: 'rgba(119, 189, 219,0.3)', color: '#1565C0'}}>
-        Click to add main photo
-        <Input type="file" sx={{display:'none'}} onChange={(e) => {
-        const file = e.target.files[0];
-        setMainPhoto(file)
-        }}/>
-      </label>
-
-    
+        <label style={{border:'1px solid rgba(21, 101, 192,0.4)' ,width: '250px', padding: '4px', borderRadius: '5px', marginTop: '8px', backgroundColor: 'rgba(119, 189, 219,0.3)', color: '#1565C0'}}>
+          Click to add main photo
+          <Input type="file" sx={{display:'none'}} onChange={(e) => {
+          const file = e.target.files[0];
+          setMainPhoto(file)
+          }}/>
+        </label>
   
-    <Box sx={{width:'100px', height: '100px', objectFit:"cover"}}>
-      <img src={mainPhoto ? URL.createObjectURL(mainPhoto) : ""} style={{maxWidth:'100%', maxHeight: '100%', display: 'block'}} alt=""/>
-    </Box>
+        <Box sx={{width:'100px', height: '100px', objectFit:"cover"}}>
+          <img src={mainPhoto ? URL.createObjectURL(mainPhoto) : ""} style={{maxWidth:'100%', maxHeight: '100%', display: 'block'}} alt=""/>
+        </Box>
+      
+        <label style={{border:'1px solid rgba(21, 101, 192,0.4)' ,width: '250px', padding: '4px', borderRadius: '5px', marginTop: '16px', backgroundColor: 'rgba(119, 189, 219,0.3)', color: '#1565C0'}}>
+          Click to add additional photos
+          <Input type="file" sx={{display:'none'}} inputProps={{ multiple: true }}
+            onChange={(e) => {
+              const list = [];
+              for(let i=0; i<e.target.files.length;i++){
+                list.push(e.target.files[i])
+              }
+              setphotosList(list)        
+            }}
+          />
+        </label>
   
-    <label style={{border:'1px solid rgba(21, 101, 192,0.4)' ,width: '250px', padding: '4px', borderRadius: '5px', marginTop: '16px', backgroundColor: 'rgba(119, 189, 219,0.3)', color: '#1565C0'}}>
-      Click to add additional photos
-      <Input type="file" sx={{display:'none'}} inputProps={{ multiple: true }}
-        onChange={(e) => {
-          const list = [];
-          for(let i=0; i<e.target.files.length;i++){
-            console.log("file",e.target.files[i])
-            list.push(e.target.files[i])
-          }
-          setphotosList(list)        
-        }}
-        />
-    </label>
-  
-    <ImageList sx={{ width: 500, height: 250 }} cols={3} rowHeight={164}>
-      {photosList.map((item,index) => (
-        <ImageListItem key={index}>
-          <img 
-          src={URL.createObjectURL(item)}
-        /> 
-      </ImageListItem> 
-        ))} 
-    </ImageList>
+        <ImageList sx={{ width: 500, height: 250 }} cols={3} rowHeight={164}>
+          {photosList.map((item,index) => (
+            <ImageListItem key={index}>
+              <img 
+              src={URL.createObjectURL(item)}
+            /> 
+          </ImageListItem> 
+            ))} 
+        </ImageList>
   
       </Stack>
-
 
     </Stack>
 

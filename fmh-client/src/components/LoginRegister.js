@@ -12,7 +12,7 @@ const LoginRegister = (props) => {
   const [overlayContainerClass,setOverlayContainerClass] = useState("moveOC100");
 
   return (
-<body>
+<main>
   <section>
     <div className="container">
       <div className={"form sign-in-form "+signInClass}>
@@ -65,7 +65,7 @@ const LoginRegister = (props) => {
       </Box>
     </div>
   </section>
-</body>
+</main>
   )
 }
 

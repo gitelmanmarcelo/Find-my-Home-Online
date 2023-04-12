@@ -37,6 +37,11 @@ const searchApt = (condition) => {
         .andWhere('price', '<=', maxPrice);
     }
 }
+const getFavs = (condition) => {
+    return db('apartments')
+    .select('*')
+    .whereIn('apt_id',condition)
+}
 
 const searchRaw = (sql_sentence) => {
     return db.raw(sql_sentence);
@@ -46,5 +51,6 @@ const searchRaw = (sql_sentence) => {
 module.exports = {
     insertApt,
     searchApt,
+    getFavs,
     searchRaw
 }

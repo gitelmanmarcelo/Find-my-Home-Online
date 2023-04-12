@@ -9,6 +9,12 @@ const bcrypt = require('bcrypt');
 const _insertSeller = async (req,res) => {
     const seller = req.body;
 
+    if (!seller.password) {
+        console.log("password not provided");
+        res.status(403).send({msg:'password not provided!'});
+        return;
+    }
+
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(seller.password,salt);
 

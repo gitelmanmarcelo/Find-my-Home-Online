@@ -1,6 +1,7 @@
 #secret file
 .env
 /fmh-client/src/secret/
+/fmh-client/src/apiKey.js
 apiKey.js
 
 # dependencies

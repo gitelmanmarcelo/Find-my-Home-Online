@@ -11,7 +11,7 @@ function SellerContact() {
   const navigate = useNavigate();
 
     return (
-        <Paper sx={{height:'70vh', marginTop: '20px', display:'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center'}}>
+        <Paper sx={{width:'80vw', height:'70vh', margin: '20px auto', display:'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center'}}>
             <Typography variant="h3">
                 Following the owner contact information:<br/><br/>
             </Typography>

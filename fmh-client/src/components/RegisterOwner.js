@@ -37,45 +37,20 @@ function RegisterOwner() {
             if (res.status !== 200){
               setMsg('Registration error');
             }
-            setRegisterData({});
+            else
+              navigate('/apt/register')
         })
         .catch (err => {
-          setRegisterData({});
           console.log('error:',err);
           setMsg('Registration error');
         })
     }
 
-    const handleRegisterChange = (e) => {
-        console.log(registerData)
-          switch (e.target.id) {
-              case 'fname':
-                  setRegisterData({...registerData,fname: e.currentTarget.value});
-                  break;
-              case 'lname':
-                  setRegisterData({...registerData,lname: e.currentTarget.value});
-                  break;
-              case 'email':
-                  setRegisterData({...registerData,email: e.currentTarget.value});
-                  break;
-              case 'phone':
-                  setRegisterData({...registerData,phone: e.currentTarget.value});
-                  break;
-              case 'username':
-                  setRegisterData({...registerData,username: e.currentTarget.value});
-                  break;
-              case 'password':
-                  setRegisterData({...registerData,password: e.currentTarget.value});
-                  break;
-              case 'confirmPassword':
-                  setRegisterData({...registerData,confirmPassword: e.currentTarget.value});
-                  break;
-              case 'accept_contact':
-                  setRegisterData({...registerData,accept_contact: e.target.checked});
-                  break;
-          }
-      }
-  
+      const handleRegisterChange = (e) => {
+      const temp = {...registerData};
+      temp[e.target.id] = e.currentTarget.value;
+      setRegisterData(temp);
+    }  
 
     return ( 
         <>
@@ -86,6 +61,7 @@ function RegisterOwner() {
               required
               value={registerData.fname}
               onChange={handleRegisterChange}
+              onInput={handleRegisterChange}
               variant="standard"
             />
             <TextField
@@ -94,6 +70,7 @@ function RegisterOwner() {
               required
               value={registerData.lname}
               onChange={handleRegisterChange}
+              onInput={handleRegisterChange}
               variant="standard"
             />
             <TextField
@@ -101,12 +78,14 @@ function RegisterOwner() {
               label="Email"
               required
               onChange={handleRegisterChange}
+              onInput={handleRegisterChange}
               variant="standard"
             />
             <TextField
               id="phone"
               label="Phone"
               onChange={handleRegisterChange}
+              onInput={handleRegisterChange}
               variant="standard"
             />
             <TextField
@@ -114,6 +93,7 @@ function RegisterOwner() {
               label="Username"
               required
               onChange={handleRegisterChange}
+              onInput={handleRegisterChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -129,6 +109,7 @@ function RegisterOwner() {
               label="Password"
               required
               onChange={handleRegisterChange}
+              onInput={handleRegisterChange}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">
@@ -148,6 +129,7 @@ function RegisterOwner() {
               label="Confirm password"
               required
               onChange={handleRegisterChange}
+              onInput={handleRegisterChange}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">

@@ -1,7 +1,7 @@
-import { Box,Stack, ToggleButton, Typography,ButtonGroup,ToggleButtonGroup, Button } from "@mui/material";
-import LocationSearchInput from './LocationSearchInput';
+import { Box,Stack, ToggleButton, Typography, ToggleButtonGroup } from "@mui/material";
 import { AppContext } from '../App';
 import { useContext, useEffect, useState } from 'react';
+import AutocompleteInput from "./AutocompleteInput";
 
 function SimpleFilters() {
     const {searchOptions,setSearchOptions,setLocalData} = useContext(AppContext);
@@ -56,9 +56,9 @@ function SimpleFilters() {
       <ToggleButton value="buy">Buy</ToggleButton>        
     </ToggleButtonGroup> 
   </Stack>
-  <Stack sx={{width:'550px'}}>
-  <LocationSearchInput/> 
-  </Stack>
+  <Box sx={{display: 'flex', justifyContent: 'flex-start', paddingLeft:'15px', width:'450px'}}>
+    <AutocompleteInput/> 
+  </Box>
   <Stack direction='row'>
   <Box sx={{width:'150px'}}>
       <Typography>Nr. of bedrooms:</Typography>
