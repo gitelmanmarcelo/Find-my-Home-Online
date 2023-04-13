@@ -56,7 +56,7 @@ const AutocompleteInput = () => {
       <input style={{width:'100%', height:'2rem', fontSize: '1rem', borderRadius: '5px'}}
         id="autocomplete-input"
         type="text"
-        placeholder="Enter city, neigborhood or street ..."
+        placeholder="Enter city, neighborhood or street ..."
         value={inputValue}
         onChange={handleInputChange}
       />

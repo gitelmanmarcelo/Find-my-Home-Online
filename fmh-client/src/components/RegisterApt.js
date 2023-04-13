@@ -61,7 +61,7 @@ function RegisterApt() {
   .then (async data => {
     const apt_id = data[0].apt_id;
     setAptData({...aptData,apt_id:apt_id});
-    setCurrApt({...aptData,apt_id:apt_id, photos_qty: photosList.length+1});
+    setCurrApt({...aptData,...localData,apt_id:apt_id, photos_qty: photosList.length+1});
     const formData = new FormData();
     formData.append("photo", new File([mainPhoto], apt_id.toString().padStart(4,'0') + '-1.jpeg', {type: mainPhoto.type}));
     for (let i=0; i <= photosList.length; i++) {

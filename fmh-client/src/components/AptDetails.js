@@ -13,7 +13,7 @@ let img1 = "visible";
 let img2 = "visible";
 let img3 = "visible";
 
-function AptDetail(props) {
+function AptDetail() {
 
     const [images,setImages] = useState([])
     const [isFavorite,SetFavorite] = useState(false);
@@ -65,7 +65,6 @@ function AptDetail(props) {
     },[isFavorite]);
 
     useEffect(() => {
-
         if (currentApt.photos_qty === 1)
         {
             img2 = "hidden";
