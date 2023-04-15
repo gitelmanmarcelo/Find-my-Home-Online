@@ -15,6 +15,7 @@ import RegisterBuyerSuccess from './components/RegisterBuyerSuccess';
 import About from './components/about';
 import Contact from './components/Contact.js';
 import FavsList from './components/FavsList';
+import RegisterSmallDevices from './components/RegisterSmallDevices';
 export const AppContext = createContext(null);
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
       <Route path="/about" element = {<About/>}/>
       <Route path="/contact" element = {<Contact/>}/>
       <Route path="/favorites" element = {<FavsList/>}/>
+      <Route path="/RegisterSmallDevices" element = {<RegisterSmallDevices/>}/>
     </Routes>
     </div>
     </AppContext.Provider>

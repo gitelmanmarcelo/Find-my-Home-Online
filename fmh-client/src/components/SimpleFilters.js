@@ -49,46 +49,50 @@ function SimpleFilters() {
 
     return (
 <>
-<Stack  spacing={4}>
+<Stack>
     <Stack>
-    <ToggleButtonGroup size="medium" sx={{marginTop: '30px', marginLeft: '12px'}} exclusive onChange={handleOpChange} value={searchOptions.is_rent ? "rent" : "buy"} color="primary">
+    <ToggleButtonGroup size="medium" sx={{marginTop: {xs:'15px', sm:'30px'}, marginLeft: '12px'}} exclusive onChange={handleOpChange} value={searchOptions.is_rent ? "rent" : "buy"} color="primary">
       <ToggleButton value="rent">Rent</ToggleButton>        
       <ToggleButton value="buy">Buy</ToggleButton>        
     </ToggleButtonGroup> 
   </Stack>
-  <Box sx={{display: 'flex', justifyContent: 'flex-start', paddingLeft:'15px', width:'450px'}}>
+  <Box sx={{display: 'flex', justifyContent: 'flex-start', paddingLeft:'15px',
+       width:{xs:300, sm:'450px'}, marginTop: {xs:'15px', sm:'30px'}}}>
     <AutocompleteInput/> 
   </Box>
-  <Stack direction='row'>
-  <Box sx={{width:'150px'}}>
-      <Typography>Nr. of bedrooms:</Typography>
-    </Box>
-  <ToggleButtonGroup size="medium" exclusive onChange={handleBedroomsChange} value={searchOptions.bedrooms} color="primary">
-    <ToggleButton className="circleBtn" value={1}>1&nbsp;</ToggleButton>        
-    <ToggleButton className="circleBtn" value={2}>2&nbsp;</ToggleButton>        
-    <ToggleButton className="circleBtn" value={3}>3&nbsp;</ToggleButton>        
-    <ToggleButton className="circleBtn" value={4}>4&nbsp;</ToggleButton>        
-    <ToggleButton className="circleBtn" value={5}>5&nbsp;</ToggleButton>        
-    <ToggleButton className="circleBtn" value={6}>6+</ToggleButton>        
-  </ToggleButtonGroup>
+  <Stack sx={{flexDirection:{sm:'column', md:'row'}}}>
+    <Box sx={{width:'150px', marginTop: {xs:'15px', sm:'40px'}}}>
+        <Typography>Nr. of bedrooms:</Typography>
+      </Box>
+    <ToggleButtonGroup size="medium" exclusive onChange={handleBedroomsChange}
+     value={searchOptions.bedrooms} color="primary" sx={{marginTop: {xs:'7px', sm:'28px'}}}>
+      <ToggleButton className="circleBtn" value={1}>1&nbsp;</ToggleButton>        
+      <ToggleButton className="circleBtn" value={2}>2&nbsp;</ToggleButton>        
+      <ToggleButton className="circleBtn" value={3}>3&nbsp;</ToggleButton>        
+      <ToggleButton className="circleBtn" value={4}>4&nbsp;</ToggleButton>        
+      <ToggleButton className="circleBtn" value={5}>5&nbsp;</ToggleButton>        
+      <ToggleButton className="circleBtn" value={6}>6+</ToggleButton>        
+    </ToggleButtonGroup>
   </Stack>
 
-  <Stack direction="row">
-  <Box sx={{width:'150px'}}>
+  <Stack sx={{flexDirection:{sm:'column', md:'row'}}}>
+  <Box sx={{width:'150px', marginTop: {xs:'15px', sm:'40px'}}}>
     <Typography>Nr. of bathrooms:</Typography>
   </Box>
-  <ToggleButtonGroup size="medium" exclusive onChange={handleBathroomsChange} value={searchOptions.bathrooms} color="primary">
+  <ToggleButtonGroup size="medium" exclusive onChange={handleBathroomsChange}
+   value={searchOptions.bathrooms} color="primary" sx={{marginTop: {xs:'7px', sm:'28px'}}}>
     <ToggleButton className="circleBtn" value={1}>1&nbsp;</ToggleButton>        
     <ToggleButton className="circleBtn" value={2}>2&nbsp;</ToggleButton>        
     <ToggleButton className="circleBtn" value={3}>3+</ToggleButton>        
   </ToggleButtonGroup>
   </Stack>
 
-  <Stack direction="row">
-  <Box sx={{width:'150px'}}>
+  <Stack sx={{flexDirection:{sm:'column', md:'row'}}}>
+  <Box sx={{width:'150px', marginTop: {xs:'15px', sm:'40px'}}}>
     <Typography>Nr. of parking lots:</Typography>
   </Box>
-  <ToggleButtonGroup size="medium" exclusive onChange={handleParkingChange} value={searchOptions.parkings} color="primary">
+  <ToggleButtonGroup size="medium" exclusive onChange={handleParkingChange} 
+  value={searchOptions.parkings} color="primary" sx={{marginTop: {xs:'7px', sm:'28px'}}}>
     <ToggleButton className="circleBtn" value={1}>1&nbsp;</ToggleButton>        
     <ToggleButton className="circleBtn" value={2}>2&nbsp;</ToggleButton>        
     <ToggleButton className="circleBtn" value={3}>3+</ToggleButton>        

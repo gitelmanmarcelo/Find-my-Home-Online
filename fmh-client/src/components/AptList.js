@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
-import { Drawer, Box, Button } from "@mui/material";
+import { Grid, Container, Drawer, Box, Button } from "@mui/material";
 import AptCard from "./AptCard";
 import AdvancedFilters from "./AdvancedFilters";
 import { serverUrl } from "../serverUrl";
@@ -38,26 +38,26 @@ function AptList()
 
 
     return (
-        <Box sx={{ width: '97%', margin : '0px', display: 'flex', justifyContent: 'center'}}>
+        <div> 
             <Button variant="contained"
-            sx={{ position: "fixed", top: 110, left: 28, zIndex: 2000 }}
+            sx={{ position: "fixed", top: 110, left: 28, zIndex: 60 }}
             onClick={() => setDrawerOpen(isDrawerOpen ? false : true)}>{isDrawerOpen ? "Close <" : "More filters >"}</Button>
-            <Drawer sx={{marginTop: '150px'}} open={isDrawerOpen} onClose={() => {setDrawerOpen(false)}}>
+            <Drawer sx={{zIndex:40, marginTop: {xs: '0', sm: '150px' } }} open={isDrawerOpen} onClose={() => {setDrawerOpen(false)}}>
                 <Box sx={{left: '10px', top: '70px', width:450, paddingTop:18, paddingLeft:2}}>
                     <AdvancedFilters/>
                 </Box>
             </Drawer>
 
-            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr 1fr', gap: '10px', marginTop: '37px'}}>
+            <Grid container sx={{width:'100%'}} spacing={5}>
             {
                 aptList.map((apt,index) => (
-                    <div key={index}>
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                         <AptCard apt={apt}/>
-                    </div>
+                    </Grid>
                 ))
             }
-            </div>
-        </Box>
+            </Grid>
+        </div>
     );
 }
 

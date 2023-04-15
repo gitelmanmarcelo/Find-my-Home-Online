@@ -1,4 +1,4 @@
-import { Stack, Box, Button, Typography } from "@mui/material";
+import { Grid,Stack, Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../App";
@@ -45,34 +45,43 @@ const handleSelfClick = () => {
                 <Typography variant="h4" >
                     In <em>Find my Home</em> we let you choose between two ways of making a deal:
                 </Typography>
-                <Stack spacing={4} direction={'row'}>
-                    <Stack spacing={3} sx={{backgroundColor: 'white', padding:'30px', borderRadius: '5px'}}>
-                        <Stack spacing={4} direction={'row'} >
-                            <Typography variant="h5" sx={{width: '350px', textAlign:'justify'}}>
-                                1. Make a deal through <em>Find my Home</em>:
-                                    This way you can stay realaxed because we take care of every detail including paper, legal advise etc. You just have to move in and enjoy your new home.
-                            </Typography>
-                            <i style={{fontSize:"7rem"}}class="fa-solid fa-umbrella-beach"></i>
-                        </Stack>
-                        <Button onClick={() => {
-                            navigate("/buyer/register");
-                        }} sx={{width:'500px'}} variant="contained">Let 
-                            "Find my Home" take care of everything I will go to the beach now</Button>
-                    </Stack>
+                <Grid container>
+                    <Grid item xs={12} sm={6}>
+                        <Box sx={{position: 'relative', height: {xs:'600px', sm:'400px'}, borderRadius: '5px', backgroundColor: 'white', marginRight:'20px', padding:'30px'}}>
+                            <Stack sx={{flexDirection:{xs:'column', sm:'row'}, alignItems: 'center'}} >
+                            <i style={{fontSize:"7rem", margin:'30px 30px'}}class="fa-solid fa-umbrella-beach"></i>
+                            <Typography variant="h5" sx={{width: '280px', textAlign:'justify'}}>
+                                    1. Make a deal through <em>Find my Home</em>:
+                                        This way you can stay realaxed because we take care of every detail including paper, legal advise etc. You just have to move in and enjoy your new home.
+                                </Typography>
+                            </Stack>
+                            <Box sx={{width:'100%', position: 'absolute', bottom: '5%', left:0}}>
+                            <Button onClick={() => {
+                                navigate("/buyer/register");
+                            }} sx={{width:'300px', margin: '0 auto',}} variant="contained">Let 
+                                "Find my Home" take care of everything I will go to the beach now</Button>
 
-                <Stack  spacing={15} sx={{backgroundColor: 'white', padding:'30px',  borderRadius: '5px'}}>
-                    <Stack direction={'row'} spacing={4}>
-                        <i style={{fontSize:"7rem"}} class="fa-regular fa-address-book"></i>
-                        <Typography variant="h5" sx={{width:'350px', textAlign:'justify'}}>
-                            2. Get the contact of the owner and talk directly to him or her. This way <em>Find my home</em> is not responsible.
-                        </Typography>
-                    </Stack>
-                    <Button onClick={handleSelfClick} sx={{width:'500px'}} variant="contained">I'd rather take care of it on my own. Please provide me with the owner contact</Button>
-                </Stack>
+                            </Box>
+                        </Box>
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <Box sx={{position: 'relative', height: {xs:'500px', sm:'400px'}, borderRadius: '5px', backgroundColor: 'white', marginTop: {xs:'20px', sm:'0'}, padding:'30px'}}>
+                            <Stack sx={{flexDirection:{xs:'column', sm:'row'}, alignItems: 'center'}} spacing={4}>
+                                <i style={{fontSize:"7rem", margin:'30px 30px'}} class="fa-regular fa-address-book"></i>
+                                <Typography variant="h5" sx={{width:'280px', textAlign:'justify'}}>
+                                    2. Get the contact of the owner and talk directly to him or her. This way <em>Find my home</em> is not responsible.
+                                </Typography>
+                            </Stack>
+                            <Box sx={{width:'100%', position: 'absolute', bottom: '5%', left:0}}>
+                                <Button onClick={handleSelfClick} sx={{width:'300px', margin:'0 auto'}} variant="contained">I'd rather take care of it on my own. Please provide me with the owner contact</Button>
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
+
             </Stack>
-
-        </Stack>
-    </Box>        
+        </Box>        
     );
 
 }

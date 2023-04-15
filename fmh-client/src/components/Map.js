@@ -32,7 +32,7 @@ const Map = (props) => {
     });
   }, []);
 
-  return <div ref={mapRef} style={{ height: '100%', width: '100%' }}></div>;
+  return <div ref={mapRef} style={{ height: '100%', width: '100%'}}></div>;
 };
 
 export default Map;

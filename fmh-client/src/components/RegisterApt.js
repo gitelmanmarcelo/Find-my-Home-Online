@@ -1,4 +1,4 @@
-import { Box, Input, ImageList, ImageListItem, TextField, FormControlLabel, FormGroup, Checkbox, Stack, ToggleButton, Typography,ToggleButtonGroup, Button } from "@mui/material";
+import { Grid, Box, Input, ImageList, ImageListItem, TextField, FormControlLabel, FormGroup, Checkbox, Stack, ToggleButton, Typography,ToggleButtonGroup, Button } from "@mui/material";
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
 import { useNavigate } from "react-router-dom";
@@ -88,169 +88,179 @@ function RegisterApt() {
   }
 
   return (
-    <>
+    <Box>
     <Typography mt={2} variant="h4">Register new apartment</Typography>
-    <Stack direction={'row'} spacing={10} mt={2} >
 
-      <Stack ml={2} spacing={2} sx={{width:'750px'}}>
 
-        <ToggleButtonGroup size="medium"  exclusive onChange={handleOpChange} value={aptData.is_rent ? "rent" : "buy"} color="primary">
-          <ToggleButton value="rent">Rent</ToggleButton>        
-          <ToggleButton value="buy">Sell</ToggleButton>        
-        </ToggleButtonGroup> 
+    <Grid container mt={2} spacing={4}>
 
-        <Box sx={{display: 'flex', justifyContent: 'flex-start', margin: '0px', paddingLeft:'0px', width:'400px'}}>
-    <AutocompleteInput/> 
-  </Box> 
+      <Grid item xs="12" md="6" lg="4" sx={{display:'flex', flexDirection:'column',alignItems:'center'}}>
 
-        <TextField InputLabelProps={{ shrink: true }}
-          id="city"
-          label="City"
-          value={localData.city}
-          onChange={handleLocalChange}
-          variant="standard"
-        />
-        <TextField InputLabelProps={{ shrink: true }}
-          id="neighborhood"
-          label="Neighborhood"
-          value={localData.neighborhood}
-          onChange={handleLocalChange}
-          variant="standard"
-        />
-        <TextField InputLabelProps={{ shrink: true }}
-          id="street"
-          label="Street"
-          value={localData.street}
-          onChange={handleLocalChange}
-          variant="standard"
-        />
 
-        <Stack direction={'row'} spacing={2}>
+        <Stack ml={2} spacing={2} sx={{width:'350px'}}>
+
+          <ToggleButtonGroup size="medium"  exclusive onChange={handleOpChange} value={aptData.is_rent ? "rent" : "buy"} color="primary">
+            <ToggleButton value="rent">Rent</ToggleButton>        
+            <ToggleButton value="buy">Sell</ToggleButton>        
+          </ToggleButtonGroup> 
+
+          <Box sx={{display: 'flex', justifyContent: 'flex-start', margin: '0px', paddingLeft:'0px', width:'350px'}}>
+        <AutocompleteInput/> 
+        </Box> 
 
           <TextField InputLabelProps={{ shrink: true }}
-            id="street_nr"
-            label="Street nr"
-            value={aptData.street_nr}
-            onChange={handleInputChange}
+            id="city"
+            label="City"
+            value={localData.city}
+            onChange={handleLocalChange}
+            variant="standard"
+          />
+          <TextField InputLabelProps={{ shrink: true }}
+            id="neighborhood"
+            label="Neighborhood"
+            value={localData.neighborhood}
+            onChange={handleLocalChange}
+            variant="standard"
+          />
+          <TextField InputLabelProps={{ shrink: true }}
+            id="street"
+            label="Street"
+            value={localData.street}
+            onChange={handleLocalChange}
             variant="standard"
           />
 
-          <TextField InputLabelProps={{ shrink: true }}
-            id="floor"
-            label="Floor"
-            value={aptData.floor}
-            onChange={handleInputChange}
-            variant="standard"
-          />
+          <Stack direction={'row'} spacing={2}>
 
+            <TextField InputLabelProps={{ shrink: true }}
+              id="street_nr"
+              label="Street nr"
+              value={aptData.street_nr}
+              onChange={handleInputChange}
+              variant="standard"
+            />
+
+            <TextField InputLabelProps={{ shrink: true }}
+              id="floor"
+              label="Floor"
+              value={aptData.floor}
+              onChange={handleInputChange}
+              variant="standard"
+            />
+
+          </Stack>
+
+          <Stack direction={'row'} spacing={2}>
+
+            <TextField InputLabelProps={{ shrink: true }}
+              id="apt_nr"
+              label="Apt nr"
+              value={aptData.apt_nr}
+              onChange={handleInputChange}
+              variant="standard"
+            />
+
+            <TextField InputLabelProps={{ shrink: true }}
+              id="building_floors"
+              label="Building floors"
+              value={aptData.building_floors}
+              onChange={handleInputChange}
+              variant="standard"
+            />
+
+          </Stack>
         </Stack>
 
-        <Stack direction={'row'} spacing={2}>
 
-          <TextField InputLabelProps={{ shrink: true }}
-            id="apt_nr"
-            label="Apt nr"
-            value={aptData.apt_nr}
-            onChange={handleInputChange}
-            variant="standard"
-          />
+      </Grid>
 
-          <TextField InputLabelProps={{ shrink: true }}
-            id="building_floors"
-            label="Building floors"
-            value={aptData.building_floors}
-            onChange={handleInputChange}
-            variant="standard"
-          />
-
-        </Stack>
-      </Stack>
-
-
-      <Stack spacing={2} sx={{width:'500px'}}>
-
-        <TextField
-          id="description"
-          multiline
-          maxRows={3} minRows={3}
-          label="Description"
-          variant="standard"
-          placeholder="Apartment description"
-          value={aptData.description}
-          onChange={handleInputChange}
-        />
-        
-        <Stack direction={'row'} spacing={2}>
+      <Grid item xs="12" md="6" lg="3" sx={{display:'flex', flexDirection:'column',alignItems:'center'}}>
+        <Stack spacing={2} sx={{width:'350px'}}>
 
           <TextField
-              id="bedrooms"
-              label="Bedrooms"
-              value={aptData.bedrooms}
-              onChange={handleInputChange}
-              variant="standard"
-            />
+            id="description"
+            multiline
+            maxRows={3} minRows={3}
+            label="Description"
+            variant="standard"
+            placeholder="Apartment description"
+            value={aptData.description}
+            onChange={handleInputChange}
+          />
+          
+          <Stack direction={'row'} spacing={2}>
 
             <TextField
-              id="bathrooms"
-              label="Bathrooms"
-              value={aptData.bathrooms}
+                id="bedrooms"
+                label="Bedrooms"
+                value={aptData.bedrooms}
+                onChange={handleInputChange}
+                variant="standard"
+              />
+
+              <TextField
+                id="bathrooms"
+                label="Bathrooms"
+                value={aptData.bathrooms}
+                onChange={handleInputChange}
+                variant="standard"
+              />
+          </Stack>
+
+          <Stack direction={'row'} spacing={2}>
+            <TextField
+              id="balconies"
+              label="Balconies"
+              value={aptData.balconies}
               onChange={handleInputChange}
               variant="standard"
             />
-        </Stack>
+            <TextField
+              id="parkings"
+              label="Parking spaces"
+              value={aptData.parkings}
+              onChange={handleInputChange}
+              variant="standard"
+            />
+          </Stack>
 
-        <Stack direction={'row'} spacing={2}>
-          <TextField
-            id="balconies"
-            label="Balconies"
-            value={aptData.balconies}
+          <TextField sx={{width:'180px'}}
+            id="size"
+            label="Size"
+            value={aptData.size}
             onChange={handleInputChange}
             variant="standard"
           />
           <TextField
-            id="parkings"
-            label="Parking spaces"
-            value={aptData.parkings}
+            id="price" sx={{width:'180px'}}
+            label="Price"
+            value={aptData.price}
             onChange={handleInputChange}
             variant="standard"
-          />
-        </Stack>
-
-        <TextField sx={{width:'180px'}}
-          id="size"
-          label="Size"
-          value={aptData.size}
-          onChange={handleInputChange}
-          variant="standard"
-        />
-        <TextField
-          id="price" sx={{width:'180px'}}
-          label="Price"
-          value={aptData.price}
-          onChange={handleInputChange}
-          variant="standard"
-          />
-
-        <Stack direction={'row'} spacing={2}>
-
-            <TextField
-              id="arnona"
-              label="Arnona (monthly)"
-              value={aptData.arnona}
-              onChange={handleInputChange}
-              variant="standard"
             />
 
-            <TextField
-              id="vaad"
-              label="Vaad (monthly)"
-              value={aptData.vaad}
-              onChange={handleInputChange}
-              variant="standard"
-            />
-        </Stack>
+          <Stack direction={'row'} spacing={2}>
 
-      </Stack>  
+              <TextField
+                id="arnona"
+                label="Arnona (monthly)"
+                value={aptData.arnona}
+                onChange={handleInputChange}
+                variant="standard"
+              />
+
+              <TextField
+                id="vaad"
+                label="Vaad (monthly)"
+                value={aptData.vaad}
+                onChange={handleInputChange}
+                variant="standard"
+              />
+          </Stack>
+        </Stack>
+      </Grid>  
+
+      <Grid item xs="12" md="6" lg="2" sx={{display:'flex', flexDirection:'column',alignItems:'center'}}>
 
       <FormGroup sx={{display:'flex', flexDirection:'columns', justifyContent: 'center', marginLeft: '0', whiteSpace: "nowrap"}}>
         <FormControlLabel control={<Checkbox checked={aptData.elevators} id={"elevators"} onChange={handleCBChange} />} label="Elevator" />
@@ -265,8 +275,10 @@ function RegisterApt() {
         <FormControlLabel control={<Checkbox checked={aptData.dud_shemesh} id={"dud_shemesh"} onChange={handleCBChange}/>} label="Dud Shemesh" />
       </FormGroup>    
 
-      <Stack spacing={2} sx={{paddingRight:'16px', width:'750px'}}>
-    
+      </Grid>
+
+      <Grid item xs="12" md="6" lg="3" sx={{display:'flex', flexDirection:'column',alignItems:'center'}}>
+
         <label style={{border:'1px solid rgba(21, 101, 192,0.4)' ,width: '250px', padding: '4px', borderRadius: '5px', marginTop: '8px', backgroundColor: 'rgba(119, 189, 219,0.3)', color: '#1565C0'}}>
           Click to add main photo
           <Input type="file" sx={{display:'none'}} onChange={(e) => {
@@ -302,13 +314,13 @@ function RegisterApt() {
             ))} 
         </ImageList>
   
-      </Stack>
+      </Grid>
 
-    </Stack>
+    </Grid>
 
-    <Button onClick={handleSubmitApt} sx={{marginTop:'36px'}} variant="contained">Confirm info and register apartment</Button>
+    <Button onClick={handleSubmitApt} sx={{margin:'36px 0'}} variant="contained">Confirm info and register apartment</Button>
 
-  </>
+  </Box>
   );
 }
 

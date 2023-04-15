@@ -2,25 +2,29 @@ import LoginOwner from "./LoginOwner";
 import "./LoginRegister.css"
 import { useState } from "react";
 import RegisterOwner from "./RegisterOwner";
+import { Link } from "react-router-dom";
 import { Box, Button, Stack, Typography } from "@mui/material";
+import RegisterSmallDevices from "./RegisterSmallDevices";
 
 const LoginRegister = (props) => {
 
-  const [signInClass,setSignInClass] = useState("active");
-  const [signUpClass,setSignUpClass] = useState("");
   const [overlayClass,setOverlayClass] = useState("moveO-50");
   const [overlayContainerClass,setOverlayContainerClass] = useState("moveOC100");
 
   return (
 <main>
   <section>
+    <div className="small_devices">
+        <LoginOwner/>
+        <p>Click <Link to="/RegisterSmallDevices">here</Link> to register</p>
+    </div>
     <div className="container">
-      <div className={"form sign-in-form "+signInClass}>
+      <div className={"form sign-in-form"}>
         <div>
           <LoginOwner/>
         </div>
       </div>
-      <div className={"form sign-up-form "+signUpClass}>
+      <div className={"form sign-up-form"}>
         <div className="wrapper">
           <RegisterOwner/>
         </div>
@@ -40,8 +44,6 @@ const LoginRegister = (props) => {
             <Button variant="contained" sx={{width: '100px', backgroundColor:"text.secondary"}} onClick={() => {
               setOverlayContainerClass("moveOC100");
               setOverlayClass("moveO-50");
-              setSignInClass("active");
-              setSignUpClass("");
             }} id="signInButton">Log In</Button>
           </Stack>
           <Stack spacing={2} className="overlay-right">
@@ -57,8 +59,6 @@ const LoginRegister = (props) => {
             <Button variant="contained" sx={{backgroundColor:"text.secondary"}} onClick={() => {
               setOverlayContainerClass("moveOC0")
               setOverlayClass("moveO0")
-              setSignInClass("");
-              setSignUpClass("active");
             }} id="signUpButton">Register</Button>
           </Stack>
         </Box>

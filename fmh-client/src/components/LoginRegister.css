@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+.small_devices {
+  display:none;
+}
+
 main {
   background-color: #eeeeee;
 }
@@ -98,3 +102,17 @@ section {
 .moveO0{
   transform : translateX(0);
 }
+
+@media only screen and (max-width: 850px) {
+  .container {
+    display: none;
+  }
+
+  .small_devices {
+    display:block;
+  }
+  
+
+
+}
+

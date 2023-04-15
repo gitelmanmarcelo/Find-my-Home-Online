@@ -58,14 +58,14 @@ function AptCard(props) {
 
     return (
         <Box style={{position: 'relative'}}>
-        <IconButton sx={{zIndex: 500, position: 'absolute', right: '10%', top: '38%'}} onClick={handleClickFavorite}>
+        <IconButton sx={{zIndex: 30, position: 'absolute', right: '10%', top: '38%'}} onClick={handleClickFavorite}>
             { isFavorite 
             ?  <FavoriteIcon sx={{fontSize: '1rem', border:'1px solid grey', borderRadius:'10%', backgroundColor: 'white', p:1 ,margin:'0 auto'}}/>
             :  <FavoriteBorderIcon sx={{fontSize: '1rem', border:'1px solid grey', borderRadius:'10%', backgroundColor: 'white', p:1 ,margin:'0 auto'}}/> 
             }
         </IconButton>
-    <div onClick={handleClick} >
-        <Box mt={2} sx={{width: '23vw', height: '450px', position: 'relative', border: '1px solid white', '&:hover' : {
+    <container onClick={handleClick} >
+        <Box mt={2} sx={{width: '100%', height: '450px', position: 'relative', border: '1px solid white', '&:hover' : {
             boxShadow: 3
         }}}>
             <Box sx={{ width:"80%", height: "45%", margin: '0 auto', marginTop: '15px', position: 'relative',
@@ -73,15 +73,15 @@ function AptCard(props) {
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center center',
                                 backgroundRepeat: 'no-repeat' }}>
-                <Box sx={{ zIndex:'200', backgroundColor: 'grey', opacity: '50%', width:"100%", height: "30%", position: 'absolute', bottom: '0', left: '0'}}>
+                <Box sx={{ zIndex:'20', backgroundColor: 'grey', opacity: '50%', width:"100%", height: "30%", position: 'absolute', bottom: '0', left: '0'}}>
                 </Box>
-                    <Box  sx={{typography: 'body2', zIndex:'300', color: 'white', position: 'absolute', bottom: '2%', left: '5%', fontWeight: 'bold'}} > 
+                    <Box  sx={{typography: 'body2', zIndex:'30', color: 'white', position: 'absolute', bottom: '2%', left: '5%', fontWeight: 'bold'}} > 
                         <Stack sx={{textAlign:"left"}}>
                             {props.apt.city} {props.apt.neighborhood ? " - "+props.apt.neighborhood : ""}<br/>
                             {props.apt.street}
                         </Stack>
                     </Box> 
-                    <Box  sx={{typography: 'body2', zIndex:'500', padding: '2px', backgroundColor: 'white', color: 'grey', position: 'absolute', top: '10%', right: '5%', fontWeight: 'bold', borderRadius:'10%'}} > 
+                    <Box  sx={{typography: 'body2', zIndex:'30', padding: '2px', backgroundColor: 'white', color: 'grey', position: 'absolute', top: '10%', right: '5%', fontWeight: 'bold', borderRadius:'10%'}} > 
                         <Stack sx={{textAlign:"left"}}>
                             {props.apt.photos_qty-1 > 0 ? "+"+(props.apt.photos_qty-1).toString() : ""}
                         </Stack>
@@ -108,7 +108,7 @@ function AptCard(props) {
                 </Stack>
             </Stack>
         </Box>
-    </div>
+    </container>
     </Box>
     )
 }

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Grid } from "@mui/material";
 import AptCard from "./AptCard";
 import { AppContext } from "../App";
 import { serverUrl } from "../serverUrl";
@@ -34,18 +34,15 @@ function FavsList()
 
 
     return (
-        <Box sx={{ width: '97%', margin : '0px', display: 'flex', justifyContent: 'center'}}>
-
-            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr 1fr', gap: '10px', marginTop: '37px'}}>
+            <Grid container sx={{width:'100%'}} spacing={5}>
             {
                 aptList.map((apt,index) => (
-                    <div key={index}>
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                         <AptCard apt={apt}/>
-                    </div>
+                    </Grid>
                 ))
             }
-            </div>
-        </Box>
+            </Grid>
     );
 }
 

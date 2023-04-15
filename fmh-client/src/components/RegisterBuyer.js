@@ -39,10 +39,10 @@ function RegisterBuyer() {
   
 
     return ( 
-      <Paper sx={{width:'50vw', height:'70vh', margin: '20px auto', display:'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center'}}>
+      <Paper sx={{width:{xs:'90vw',sm:'50vw'}, height:'70vh', margin: '20px auto', display:'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center'}}>
 
-        <Typography variant="h5" color='#1976d2' m={4} sx={{textAlign:'left'}}>
-          Please give some contact information:
+        <Typography variant="h5" color='#1976d2' mt={8} sx={{textAlign:'center'}}>
+          Please provide some contact information:
         </Typography>
         <Stack m={8} sx={{width:'300px'}}>
           <TextField 
